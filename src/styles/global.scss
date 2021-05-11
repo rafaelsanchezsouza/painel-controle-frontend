@@ -1,11 +1,56 @@
-.headerContainer {
-  background: white;
-  height: 6.5rem;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  display: flex;
-  align-items: center;
+:root {
+  --white: #ffffff;
+  --gray: #f5f5f5;
+  --dark-blue: #213f9a;
+  --light-blue: #305cab;
+  --dark-orange: #da5c2f;
+  --light-orange: #e87949;
+  --purple: #733d78;
+}
 
-  padding: 2rem 4rem;
+@media (max-width: 1080px) {
+  html {
+    font-size: 93.75%;
+  }
+}
 
-  border-bottom: 1px solid black;
+body {
+  background: var(--gray);
+}
+
+body,
+input,
+textarea,
+button {
+  font: 500 1rem Inter, sans-serif;
+  color: var(--purple);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  font-family: Lexend, sans-serif;
+  color: var(--dark-blue);
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+button {
+  cursor: pointer;
 }
