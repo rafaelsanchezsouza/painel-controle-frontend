@@ -1,3 +1,4 @@
+import format from 'date-fns/format';
 import styles from './styles.module.scss';
 
 export function Header() {
