@@ -1,0 +1,24 @@
+{
+  "portais": [
+    {
+      "id": 1,
+      "codigo": "consigosasco",
+      "nome": "Prefeitura de Osasco"
+    },
+    {
+      "id": 2,
+      "codigo": "consignatal",
+      "nome": "Prefeitura de Natal"
+    },
+    {
+      "id": 3,
+      "codigo": "consigjoaopessoa",
+      "nome": "Prefeitura de João Pessoa"
+    },
+    {
+      "id": 4,
+      "codigo": "tjrn",
+      "nome": "Tribunal de Justiça do Rio Grande do Norte"
+    }
+  ]
+}
