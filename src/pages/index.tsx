@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import { useEffect, useState } from 'react';
 
 // Components
@@ -8,7 +9,18 @@ import next from 'next';
 // Variables
 // import getPortais from '../portais.json';
 
-export default function Home(props) {
+// Types
+type HomeProps = {
+  portais: Array<Portal>;
+};
+
+type Portal = {
+  id: string;
+  codigo: string;
+  nome: string;
+};
+
+export default function Home(props: HomeProps) {
   const [portais, setPortais] = useState([]);
 
   return (
@@ -21,7 +33,7 @@ export default function Home(props) {
   );
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   const response = await fetch('http://localhost:3333/portais');
   const data = await response.json();
 
@@ -30,4 +42,4 @@ export async function getServerSideProps() {
       episodes: data,
     },
   };
-}
+};
