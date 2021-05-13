@@ -1,10 +1,8 @@
 import { GetServerSideProps } from 'next';
-import { useEffect, useState } from 'react';
+import Link from 'next/link';
+
 import api from '../service/api';
 import styles from './home.module.scss';
-
-// Components
-import { Portal } from '../components/Portal';
 
 // Types
 type HomeProps = {
@@ -39,7 +37,11 @@ export default function Home({ portais }: HomeProps) {
             {portais.map((portal: Portal) => {
               return (
                 <tr key={portal.id}>
-                  <td className={styles.nomenclatura}>{portal.nomenclatura}</td>
+                  <td className={styles.nomenclatura}>
+                    <Link href={`/portais/${portal.nomeBase}`}>
+                      <a>{portal.nomenclatura}</a>
+                    </Link>
+                  </td>
                   <td>
                     <a
                       href={`https://www.consigsimples.com.br/${portal.nomeBase}`}

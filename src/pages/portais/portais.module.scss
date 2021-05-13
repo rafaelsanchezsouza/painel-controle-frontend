@@ -1,0 +1,66 @@
+.portal {
+  padding: 0 4rem;
+  height: calc(100vh - 6.5rem);
+  overflow-y: scroll;
+
+  h2 {
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  button {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    border: 0;
+
+    transition: filter 0.2s;
+
+    right: 0;
+    bottom: 0;
+    background: var(--light-orange);
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+}
+
+.portais {
+  padding-bottom: 2rem;
+
+  table {
+    width: 100%;
+
+    th,
+    td {
+      height: 4rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid gray;
+    }
+
+    th {
+      color: var(--light-orange);
+      text-transform: uppercase;
+      font: 500 0.75rem Lexend, sans-serif;
+      text-align: left;
+      height: 2rem;
+    }
+
+    td {
+      font-size: 1.15rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--light-blue);
+    }
+  }
+  .nomenclatura {
+    font-family: Lexend, sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    line-height: 1.4rem;
+    font-size: 1.2rem;
+  }
+}
