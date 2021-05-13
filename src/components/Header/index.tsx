@@ -11,7 +11,7 @@ export function Header() {
     <header className={styles.headerContainer}>
       <img src="/logo.png" alt="SP Consig"></img>
 
-      <p>Tecnologia Simples</p>
+      <p>São Paulo Consig</p>
 
       <span>{currentDate}</span>
     </header>
