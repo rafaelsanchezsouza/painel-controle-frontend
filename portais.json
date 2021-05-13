@@ -2,23 +2,31 @@
   "portais": [
     {
       "id": 1,
-      "codigo": "consigosasco",
-      "nome": "Prefeitura de Osasco"
+      "cnpj": "46.522.967/0001-34",
+      "nomeBase": "ConsigRibeiraoPires",
+      "nomenclatura": "PM Ribeirão Pires",
+      "status": "Ok"
     },
     {
       "id": 2,
-      "codigo": "consignatal",
-      "nome": "Prefeitura de Natal"
+      "cnpj": "09.012.493/0001-54",
+      "nomeBase": "ConsigCabedelo",
+      "nomenclatura": "PM Cabedelo",
+      "status": "Ok"
     },
     {
       "id": 3,
-      "codigo": "consigjoaopessoa",
-      "nome": "Prefeitura de João Pessoa"
+      "cnpj": "10.404.184/0001-49",
+      "nomeBase": "ConsigOlinda",
+      "nomenclatura": "PM Olinda",
+      "status": "Ok"
     },
     {
       "id": 4,
-      "codigo": "tjrn",
-      "nome": "Tribunal de Justiça do Rio Grande do Norte"
+      "cnpj": "46.621.538/0001-14",
+      "nomeBase": "ConsigIPMO",
+      "nomenclatura": "PM Osasco - Previdência",
+      "status": "Ok"
     }
   ]
 }
