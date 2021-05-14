@@ -12,11 +12,26 @@ type HomeProps = {
 };
 
 type Portal = {
-  id: string;
   cnpj: string;
   nomeBase: string;
   nomenclatura: string;
-  status: string;
+  vencimento: string;
+  comercial: {
+    gestorFolha: {
+      nome: string;
+      email: string;
+      telefone: string;
+    };
+    secretarioPasta: {
+      nome: string;
+      email: string;
+      telefone: string;
+    };
+    dataAtualizacao: string;
+  };
+  status: {
+    geral: string;
+  };
 };
 
 export default function Home({ portais }: HomeProps) {
@@ -39,7 +54,7 @@ export default function Home({ portais }: HomeProps) {
           <tbody>
             {portais.map((portal: Portal) => {
               return (
-                <tr key={portal.id}>
+                <tr key={portal.cnpj}>
                   <td className={styles.nomenclatura}>
                     <Link href={`/portais/${portal.nomeBase}`}>
                       <a onClick={() => escolhePortal(portal)}>
@@ -56,7 +71,7 @@ export default function Home({ portais }: HomeProps) {
                   </td>
 
                   <td>{portal.cnpj}</td>
-                  <td>{portal.status}</td>
+                  <td>{portal.status.geral}</td>
                 </tr>
               );
             })}

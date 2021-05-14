@@ -14,40 +14,78 @@ export default function Portais() {
 
   return (
     <div className={styles.portal}>
-      <h2>{router.query.nomeBase}</h2>
+      <section className={styles.header}>
+        <h2>{portal.nomenclatura}</h2>
+        <Link href={'/'}>
+          <button type="button">
+            <img src="/arrow-left.svg" alt="Voltar" />
+          </button>
+        </Link>
+      </section>
 
-      <section className={styles.infoPortal}>
-        <table cellSpacing={0}>
-          <thead>
-            <tr>
-              <th>Nomenclatura</th>
-              <th>Nome da Base</th>
-              <th>CNPJ</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-
+      <h3>Geral</h3>
+      <section className={styles.infoGeral}>
+        <table>
           <tbody>
-            <tr key={portal.id}>
-              <td className={styles.nomenclatura}>dawdawdawdw</td>
+            <tr>
+              <td className={styles.destaque}>Vencimento do Comodato</td>
+              <td>{portal.vencimento}</td>
+            </tr>
+            <tr>
+              <td className={styles.destaque}>CNPJ</td>
+              <td>{portal.cnpj}</td>
+            </tr>
+
+            <tr>
+              <td className={styles.destaque}>Portal</td>
               <td>
                 <a href={`https://www.consigsimples.com.br/${portal.nomeBase}`}>
-                  {portal.nomeBase}
+                  {`https://www.consigsimples.com.br/${portal.nomeBase}`}
                 </a>
               </td>
+            </tr>
 
-              <td>{portal.cnpj}</td>
-              <td>{portal.status}</td>
+            <tr>
+              <td className={styles.destaque}>Status</td>
+              <td>{portal.status.geral}</td>
             </tr>
           </tbody>
         </table>
       </section>
 
-      <Link href={'/'}>
-        <button type="button">
-          <img src="/arrow-left.svg" alt="Voltar" />
-        </button>
-      </Link>
+      <h3>Comercial</h3>
+      <section className={styles.infoDepartamento}>
+        <table cellSpacing={0}>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Nome</th>
+              <th>Telefone</th>
+              <th>E-mail</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td className={styles.destaque}>Gestor da Folha</td>
+              <td>{portal.comercial.gestorFolha.nome}</td>
+              <td>{portal.comercial.gestorFolha.telefone}</td>
+              <td>{portal.comercial.gestorFolha.email}</td>
+            </tr>
+            <tr>
+              <td className={styles.destaque}>Secretário da Pasta</td>
+              <td>{portal.comercial.secretarioPasta.nome}</td>
+              <td>{portal.comercial.secretarioPasta.telefone}</td>
+              <td>{portal.comercial.secretarioPasta.email}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section className={styles.dataAtualizacao}>
+        <p>Última Atualização</p>
+        <span>{portal.comercial.dataAtualizacao}</span>
+      </section>
     </div>
   );
 }

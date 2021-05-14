@@ -5,6 +5,13 @@
 
   h2 {
     margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  h3 {
+    color: var(--light-orange);
+    text-transform: uppercase;
+    margin-top: 0.5rem;
     margin-bottom: 1.5rem;
   }
 
@@ -16,6 +23,7 @@
 
     transition: filter 0.2s;
 
+    margin-left: auto;
     right: 0;
     bottom: 0;
     background: var(--light-orange);
@@ -24,9 +32,22 @@
       filter: brightness(0.9);
     }
   }
+  .header {
+    display: flex;
+    align-items: center;
+  }
+
+  .destaque {
+    color: var(--purple);
+    font-family: Lexend, sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    line-height: 1.4rem;
+    font-size: 1.2rem;
+  }
 }
 
-.infoPortal {
+.infoGeral {
   padding-bottom: 2rem;
 
   table {
@@ -34,9 +55,9 @@
 
     th,
     td {
-      height: 4rem;
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid gray;
+      height: 2rem;
+      padding: 0.5rem 1rem;
+      color: var(--dark-blue);
     }
 
     th {
@@ -56,11 +77,55 @@
       color: var(--light-blue);
     }
   }
-  .nomenclatura {
+  .destaque {
+    padding: 0.5rem 1rem;
+    color: var(--purple);
     font-family: Lexend, sans-serif;
     font-weight: 600;
     text-decoration: none;
     line-height: 1.4rem;
     font-size: 1.2rem;
   }
+}
+.infoDepartamento {
+  padding-bottom: 2rem;
+
+  table {
+    width: 100%;
+
+    th,
+    td {
+      height: 2rem;
+      padding: 0.5rem 1rem;
+      color: var(--dark-blue);
+    }
+
+    th {
+      color: var(--light-orange);
+      text-transform: uppercase;
+      font: 500 0.75rem Lexend, sans-serif;
+      text-align: left;
+      height: 2rem;
+    }
+
+    td {
+      font-size: 1.15rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--light-blue);
+    }
+  }
+}
+.dataAtualizacao {
+  padding-bottom: 2rem;
+  color: var(--dark-blue);
+}
+
+.status {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 1rem;
+  border: 1px solid var(--purple);
 }

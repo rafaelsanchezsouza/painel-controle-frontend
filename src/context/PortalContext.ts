@@ -1,11 +1,26 @@
 import { createContext } from 'react';
 
 type Portal = {
-  id: string;
   cnpj: string;
   nomeBase: string;
   nomenclatura: string;
-  status: string;
+  vencimento: string;
+  comercial: {
+    gestorFolha: {
+      nome: string;
+      email: string;
+      telefone: string;
+    };
+    secretarioPasta: {
+      nome: string;
+      email: string;
+      telefone: string;
+    };
+    dataAtualizacao: string;
+  };
+  status: {
+    geral: string;
+  };
 };
 
 type PortalContextData = {
