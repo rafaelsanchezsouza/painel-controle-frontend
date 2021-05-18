@@ -47,7 +47,7 @@ export default function Portais() {
 
             <tr>
               <td className={styles.destaque}>Status</td>
-              <td>{portal.status.geral}</td>
+              <td>{portal.status}</td>
             </tr>
           </tbody>
         </table>
@@ -62,29 +62,27 @@ export default function Portais() {
               <th>Nome</th>
               <th>Telefone</th>
               <th>E-mail</th>
+              <th>Atualizado</th>
             </tr>
           </thead>
 
           <tbody>
             <tr>
               <td className={styles.destaque}>Gestor da Folha</td>
-              <td>{portal.comercial.gestorFolha.nome}</td>
-              <td>{portal.comercial.gestorFolha.telefone}</td>
-              <td>{portal.comercial.gestorFolha.email}</td>
+              <td>{portal.gestor.nome}</td>
+              <td>{portal.gestor.telefone}</td>
+              <td>{portal.gestor.email}</td>
+              <td>{portal.gestor.updated_at}</td>
             </tr>
             <tr>
               <td className={styles.destaque}>Secretário da Pasta</td>
-              <td>{portal.comercial.secretarioPasta.nome}</td>
-              <td>{portal.comercial.secretarioPasta.telefone}</td>
-              <td>{portal.comercial.secretarioPasta.email}</td>
+              <td>{portal.secretario.nome}</td>
+              <td>{portal.secretario.telefone}</td>
+              <td>{portal.secretario.email}</td>
+              <td>{portal.secretario.updated_at}</td>
             </tr>
           </tbody>
         </table>
-      </section>
-
-      <section className={styles.dataAtualizacao}>
-        <p>Última Atualização</p>
-        <span>{portal.comercial.dataAtualizacao}</span>
       </section>
     </div>
   );

@@ -5,21 +5,22 @@ type Portal = {
   nomeBase: string;
   nomenclatura: string;
   vencimento: string;
-  comercial: {
-    gestorFolha: {
-      nome: string;
-      email: string;
-      telefone: string;
-    };
-    secretarioPasta: {
-      nome: string;
-      email: string;
-      telefone: string;
-    };
-    dataAtualizacao: string;
+  status: string;
+  gestor: {
+    id: string;
+    nome: string;
+    email: string;
+    telefone: string;
+    created_at: Date;
+    updated_at: Date;
   };
-  status: {
-    geral: string;
+  secretario: {
+    id: string;
+    nome: string;
+    email: string;
+    telefone: string;
+    created_at: Date;
+    updated_at: Date;
   };
 };
 

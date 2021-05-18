@@ -16,21 +16,22 @@ type Portal = {
   nomeBase: string;
   nomenclatura: string;
   vencimento: string;
-  comercial: {
-    gestorFolha: {
-      nome: string;
-      email: string;
-      telefone: string;
-    };
-    secretarioPasta: {
-      nome: string;
-      email: string;
-      telefone: string;
-    };
-    dataAtualizacao: string;
+  status: string;
+  gestor: {
+    id: string;
+    nome: string;
+    email: string;
+    telefone: string;
+    created_at: Date;
+    updated_at: Date;
   };
-  status: {
-    geral: string;
+  secretario: {
+    id: string;
+    nome: string;
+    email: string;
+    telefone: string;
+    created_at: Date;
+    updated_at: Date;
   };
 };
 
@@ -71,7 +72,7 @@ export default function Home({ portais }: HomeProps) {
                   </td>
 
                   <td>{portal.cnpj}</td>
-                  <td>{portal.status.geral}</td>
+                  <td>{portal.status}</td>
                 </tr>
               );
             })}
@@ -83,7 +84,7 @@ export default function Home({ portais }: HomeProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { data } = await api.get('portais');
+  const { data } = await api.get('/portais');
 
   return {
     props: {
