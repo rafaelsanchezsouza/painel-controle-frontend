@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useContext } from 'react';
-import { PortalContext } from '../context/portalContext';
 
 import api from '../service/api';
 import styles from './home.module.scss';
@@ -36,7 +35,6 @@ type Portal = {
 };
 
 export default function Home({ portais }: HomeProps) {
-  const { escolhePortal } = useContext(PortalContext);
   return (
     <div className={styles.homepage}>
       <section className={styles.portais}>
@@ -58,9 +56,7 @@ export default function Home({ portais }: HomeProps) {
                 <tr key={portal.cnpj}>
                   <td className={styles.nomenclatura}>
                     <Link href={`/portais/${portal.nomeBase}`}>
-                      <a onClick={() => escolhePortal(portal)}>
-                        {portal.nomenclatura}
-                      </a>
+                      <a>{portal.nomenclatura}</a>
                     </Link>
                   </td>
                   <td>
