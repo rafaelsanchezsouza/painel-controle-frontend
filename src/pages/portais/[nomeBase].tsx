@@ -1,10 +1,19 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
+import format from 'date-fns/format';
+import ptBR from 'date-fns/locale/pt-BR';
 
 import { PortalContext } from '../../context/portalContext';
 
 import styles from './portais.module.scss';
+
+function formatDate(date: Date) {
+  const formattedDate = format(new Date(date), 'dd/MM/yyyy', {
+    locale: ptBR,
+  });
+  return formattedDate;
+}
 
 export default function Portais() {
   const router = useRouter();
@@ -72,14 +81,14 @@ export default function Portais() {
               <td>{portal.gestor.nome}</td>
               <td>{portal.gestor.telefone}</td>
               <td>{portal.gestor.email}</td>
-              <td>{portal.gestor.updated_at}</td>
+              <td>{formatDate(portal.gestor.updated_at)}</td>
             </tr>
             <tr>
               <td className={styles.destaque}>Secretário da Pasta</td>
               <td>{portal.secretario.nome}</td>
               <td>{portal.secretario.telefone}</td>
               <td>{portal.secretario.email}</td>
-              <td>{portal.secretario.updated_at}</td>
+              <td>{formatDate(portal.secretario.updated_at)}</td>
             </tr>
           </tbody>
         </table>
