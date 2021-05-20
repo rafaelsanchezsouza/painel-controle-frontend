@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Router, useRouter } from 'next/router';
-import { useContext } from 'react';
 import format from 'date-fns/format';
 import ptBR from 'date-fns/locale/pt-BR';
 
@@ -9,6 +8,7 @@ import api from '../../service/api';
 import { GetServerSideProps } from 'next';
 
 import styles from './portais.module.scss';
+import { useEffect, useState } from 'react';
 
 // Types
 type HomeProps = {
@@ -46,19 +46,17 @@ function formatDate(date: Date) {
   return formattedDate;
 }
 
-let nomeBase: string;
-
-export default function Portais({ portal }: HomeProps) {
+export default function Portais() {
+  const [data, setData] = useState<Portal[]>([]);
   const router = useRouter();
-  nomeBase = Array.isArray(router.query.nomeBase)
-    ? router.query.nomeBase[0]
-    : router.query.nomeBase;
+  const nomeBase = router.query.nomeBase;
 
-  console.log('nomeBase: ');
-  console.log(nomeBase);
-
-  console.log('portal: ');
-  console.log(portal);
+  useEffect(() => {
+    api.get(`/portais/${nomeBase}`).then((response) => {
+      setData(response.data);
+    });
+  }, []);
+  const portal = data[0];
 
   return (
     <div className={styles.portal}>
@@ -135,13 +133,3 @@ export default function Portais({ portal }: HomeProps) {
     </div>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { data } = await api.get(`/portais/${nomeBase}`);
-
-  return {
-    props: {
-      portal: data[0],
-    },
-  };
-};
