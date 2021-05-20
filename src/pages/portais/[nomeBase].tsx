@@ -1,11 +1,10 @@
 import Link from 'next/link';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import format from 'date-fns/format';
 import ptBR from 'date-fns/locale/pt-BR';
 
 // API
 import api from '../../service/api';
-import { GetServerSideProps } from 'next';
 
 import styles from './portais.module.scss';
 import { useEffect, useState } from 'react';
@@ -47,89 +46,92 @@ function formatDate(date: Date) {
 }
 
 export default function Portais() {
-  const [data, setData] = useState<Portal[]>([]);
+  const [portal, setPortal] = useState<Portal>();
   const router = useRouter();
   const nomeBase = router.query.nomeBase;
 
   useEffect(() => {
     api.get(`/portais/${nomeBase}`).then((response) => {
-      setData(response.data);
+      setPortal(response.data[0]);
     });
   }, []);
-  const portal = data[0];
 
-  return (
-    <div className={styles.portal}>
-      <section className={styles.header}>
-        <h2>{portal.nomenclatura}</h2>
-        <Link href={'/'}>
-          <button type="button">
-            <img src="/arrow-left.svg" alt="Voltar" />
-          </button>
-        </Link>
-      </section>
+  if (portal) {
+    return (
+      <div className={styles.portal}>
+        <section className={styles.header}>
+          <h2>{portal.nomenclatura}</h2>
+          <Link href={'/'}>
+            <button type="button">
+              <img src="/arrow-left2.svg" alt="Voltar" />
+            </button>
+          </Link>
+        </section>
 
-      <h3>Geral</h3>
-      <section className={styles.infoGeral}>
-        <table>
-          <tbody>
-            <tr>
-              <td className={styles.destaque}>Vencimento do Comodato</td>
-              <td>{portal.vencimento}</td>
-            </tr>
-            <tr>
-              <td className={styles.destaque}>CNPJ</td>
-              <td>{portal.cnpj}</td>
-            </tr>
+        <h3>Geral</h3>
+        <section className={styles.infoGeral}>
+          <table>
+            <tbody>
+              <tr>
+                <td className={styles.destaque}>Vencimento do Comodato</td>
+                <td>{portal.vencimento}</td>
+              </tr>
+              <tr>
+                <td className={styles.destaque}>CNPJ</td>
+                <td>{portal.cnpj}</td>
+              </tr>
 
-            <tr>
-              <td className={styles.destaque}>Portal</td>
-              <td>
-                <a href={`https://www.consigsimples.com.br/${portal.nomeBase}`}>
-                  {`https://www.consigsimples.com.br/${portal.nomeBase}`}
-                </a>
-              </td>
-            </tr>
+              <tr>
+                <td className={styles.destaque}>Portal</td>
+                <td>
+                  <a
+                    href={`https://www.consigsimples.com.br/${portal.nomeBase}`}
+                  >
+                    {`https://www.consigsimples.com.br/${portal.nomeBase}`}
+                  </a>
+                </td>
+              </tr>
 
-            <tr>
-              <td className={styles.destaque}>Status</td>
-              <td>{portal.status}</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+              <tr>
+                <td className={styles.destaque}>Status</td>
+                <td>{portal.status}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
-      <h3>Comercial</h3>
-      <section className={styles.infoDepartamento}>
-        <table cellSpacing={0}>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Nome</th>
-              <th>Telefone</th>
-              <th>E-mail</th>
-              <th>Atualizado</th>
-            </tr>
-          </thead>
+        <h3>Comercial</h3>
+        <section className={styles.infoDepartamento}>
+          <table cellSpacing={0}>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>E-mail</th>
+                <th>Atualizado</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            <tr>
-              <td className={styles.destaque}>Gestor da Folha</td>
-              <td>{portal.gestor.nome}</td>
-              <td>{portal.gestor.telefone}</td>
-              <td>{portal.gestor.email}</td>
-              <td>{formatDate(portal.gestor.updated_at)}</td>
-            </tr>
-            <tr>
-              <td className={styles.destaque}>Secretário da Pasta</td>
-              <td>{portal.secretario.nome}</td>
-              <td>{portal.secretario.telefone}</td>
-              <td>{portal.secretario.email}</td>
-              <td>{formatDate(portal.secretario.updated_at)}</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-    </div>
-  );
+            <tbody>
+              <tr>
+                <td className={styles.destaque}>Gestor da Folha</td>
+                <td>{portal.gestor.nome}</td>
+                <td>{portal.gestor.telefone}</td>
+                <td>{portal.gestor.email}</td>
+                <td>{formatDate(portal.gestor.updated_at)}</td>
+              </tr>
+              <tr>
+                <td className={styles.destaque}>Secretário da Pasta</td>
+                <td>{portal.secretario.nome}</td>
+                <td>{portal.secretario.telefone}</td>
+                <td>{portal.secretario.email}</td>
+                <td>{formatDate(portal.secretario.updated_at)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    );
+  } else return <h1>Carregando...</h1>;
 }
