@@ -1,4 +1,4 @@
-.portal {
+.createPortal {
   padding: 0 4rem;
   height: calc(100vh - 6.5rem);
   overflow-y: scroll;
@@ -18,12 +18,12 @@
   button {
     width: 3rem;
     height: 3rem;
+    margin-left: 0.5rem;
     border-radius: 0.75rem;
     border: 0;
 
     transition: filter 0.2s;
 
-    margin-left: auto;
     right: 0;
     bottom: 0;
     background: var(--dark-orange);
@@ -32,6 +32,28 @@
       filter: brightness(0.9);
     }
   }
+  .submitButton {
+    width: 9rem;
+    font-size: 1.2rem;
+    color: white;
+    background: var(--light-blue);
+  }
+
+  .buttons {
+    width: 400px;
+    display: flex;
+    justify-content: flex-end;
+
+    margin-left: auto;
+  }
+
+  input {
+    border: 0px;
+    width: 90%;
+    height: 2.5em;
+    font-size: 1.3rem;
+  }
+
   .header {
     display: flex;
     align-items: center;
@@ -78,6 +100,8 @@
     }
   }
   .destaque {
+    table-layout: fixed;
+    width: 400px;
     padding: 0.5rem 1rem;
     color: var(--purple);
     font-family: Lexend, sans-serif;
@@ -87,6 +111,7 @@
     font-size: 1.2rem;
   }
 }
+
 .infoDepartamento {
   padding-bottom: 2rem;
 
@@ -95,7 +120,7 @@
 
     th,
     td {
-      height: 2rem;
+      height: 4rem;
       padding: 0.5rem 1rem;
       color: var(--dark-blue);
     }
@@ -103,7 +128,7 @@
     th {
       color: var(--dark-orange);
       text-transform: uppercase;
-      font: 500 0.75rem Lexend, sans-serif;
+      font: 500 1rem Lexend, sans-serif;
       text-align: left;
       height: 2rem;
     }

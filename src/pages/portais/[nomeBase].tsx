@@ -63,7 +63,7 @@ export default function Portais() {
           <h2>{portal.nomenclatura}</h2>
           <Link href={'/'}>
             <button type="button">
-              <img src="/arrow-left2.svg" alt="Voltar" />
+              <img src="/arrow-left.svg" alt="Voltar" />
             </button>
           </Link>
         </section>

@@ -5,7 +5,7 @@
 
   h2 {
     margin-top: 3rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 3rem;
   }
 }
 
@@ -23,7 +23,7 @@
     }
 
     th {
-      color: var(--light-orange);
+      color: var(--dark-orange);
       text-transform: uppercase;
       font: 500 0.75rem Lexend, sans-serif;
       text-align: left;
@@ -45,5 +45,28 @@
     text-decoration: none;
     line-height: 1.4rem;
     font-size: 1.2rem;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+
+  button {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    border: 0;
+
+    transition: filter 0.2s;
+
+    margin-left: auto;
+    right: 0;
+    bottom: 0;
+    background: var(--dark-orange);
+
+    &:hover {
+      filter: brightness(0.9);
+    }
   }
 }

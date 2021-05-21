@@ -37,9 +37,15 @@ type Portal = {
 export default function Home({ portais }: HomeProps) {
   return (
     <div className={styles.homepage}>
-      <section className={styles.portais}>
+      <section className={styles.header}>
         <h2>Portais </h2>
-
+        <Link href={'/criarPortal'}>
+          <button type="button">
+            <img src="/create.svg" alt="Criar Portal" />
+          </button>
+        </Link>
+      </section>
+      <section className={styles.portais}>
         <table cellSpacing={0}>
           <thead>
             <tr>
