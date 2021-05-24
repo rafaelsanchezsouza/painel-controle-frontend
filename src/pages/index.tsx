@@ -11,8 +11,8 @@ type HomeProps = {
 };
 
 type Portal = {
-  cnpj: string;
   nomeBase: string;
+  cnpj: string;
   nomenclatura: string;
   vencimento: string;
   status: string;

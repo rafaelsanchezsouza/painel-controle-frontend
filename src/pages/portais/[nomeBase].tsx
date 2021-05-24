@@ -9,14 +9,9 @@ import api from '../../service/api';
 import styles from './portais.module.scss';
 import { useEffect, useState } from 'react';
 
-// Types
-type HomeProps = {
-  portal: Portal;
-};
-
 type Portal = {
-  cnpj: string;
   nomeBase: string;
+  cnpj: string;
   nomenclatura: string;
   vencimento: string;
   status: string;
@@ -51,87 +46,105 @@ export default function Portais() {
   const nomeBase = router.query.nomeBase;
 
   useEffect(() => {
-    api.get(`/portais/${nomeBase}`).then((response) => {
+    const request = `/portais/${nomeBase}`;
+    api.get(request).then((response) => {
       setPortal(response.data[0]);
+
+      console.log('request: ');
+      console.log(request);
+
+      console.log('response.data: ');
+      console.log(response.data);
     });
   }, []);
 
+  console.log('nomeBase: ');
+  console.log(nomeBase);
+
+  console.log('portal: ');
+  console.log(portal);
+
   if (portal) {
-    return (
-      <div className={styles.portal}>
-        <section className={styles.header}>
-          <h2>{portal.nomenclatura}</h2>
-          <Link href={'/'}>
-            <button type="button">
-              <img src="/arrow-left.svg" alt="Voltar" />
-            </button>
-          </Link>
-        </section>
+    try {
+      return (
+        <div className={styles.portal}>
+          <section className={styles.header}>
+            <h2>{portal.nomenclatura}</h2>
+            <Link href={'/'}>
+              <button type="button">
+                <img src="/arrow-left.svg" alt="Voltar" />
+              </button>
+            </Link>
+          </section>
 
-        <h3>Geral</h3>
-        <section className={styles.infoGeral}>
-          <table>
-            <tbody>
-              <tr>
-                <td className={styles.destaque}>Vencimento do Comodato</td>
-                <td>{portal.vencimento}</td>
-              </tr>
-              <tr>
-                <td className={styles.destaque}>CNPJ</td>
-                <td>{portal.cnpj}</td>
-              </tr>
+          <h3>Geral</h3>
+          <section className={styles.infoGeral}>
+            <table>
+              <tbody>
+                <tr>
+                  <td className={styles.destaque}>Vencimento do Comodato</td>
+                  <td>{portal.vencimento}</td>
+                </tr>
+                <tr>
+                  <td className={styles.destaque}>CNPJ</td>
+                  <td>{portal.cnpj}</td>
+                </tr>
 
-              <tr>
-                <td className={styles.destaque}>Portal</td>
-                <td>
-                  <a
-                    href={`https://www.consigsimples.com.br/${portal.nomeBase}`}
-                  >
-                    {`https://www.consigsimples.com.br/${portal.nomeBase}`}
-                  </a>
-                </td>
-              </tr>
+                <tr>
+                  <td className={styles.destaque}>Portal</td>
+                  <td>
+                    <a
+                      href={`https://www.consigsimples.com.br/${portal.nomeBase}`}
+                    >
+                      {`https://www.consigsimples.com.br/${portal.nomeBase}`}
+                    </a>
+                  </td>
+                </tr>
 
-              <tr>
-                <td className={styles.destaque}>Status</td>
-                <td>{portal.status}</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
+                <tr>
+                  <td className={styles.destaque}>Status</td>
+                  <td>{portal.status}</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
 
-        <h3>Comercial</h3>
-        <section className={styles.infoDepartamento}>
-          <table cellSpacing={0}>
-            <thead>
-              <tr>
-                <th></th>
-                <th>Nome</th>
-                <th>Telefone</th>
-                <th>E-mail</th>
-                <th>Atualizado</th>
-              </tr>
-            </thead>
+          <h3>Comercial</h3>
+          <section className={styles.infoDepartamento}>
+            <table cellSpacing={0}>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Nome</th>
+                  <th>Telefone</th>
+                  <th>E-mail</th>
+                  <th>Atualizado</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              <tr>
-                <td className={styles.destaque}>Gestor da Folha</td>
-                <td>{portal.gestor.nome}</td>
-                <td>{portal.gestor.telefone}</td>
-                <td>{portal.gestor.email}</td>
-                <td>{formatDate(portal.gestor.updated_at)}</td>
-              </tr>
-              <tr>
-                <td className={styles.destaque}>Secretário da Pasta</td>
-                <td>{portal.secretario.nome}</td>
-                <td>{portal.secretario.telefone}</td>
-                <td>{portal.secretario.email}</td>
-                <td>{formatDate(portal.secretario.updated_at)}</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-      </div>
-    );
+              <tbody>
+                <tr>
+                  <td className={styles.destaque}>Gestor da Folha</td>
+                  <td>{portal.gestor.nome}</td>
+                  <td>{portal.gestor.telefone}</td>
+                  <td>{portal.gestor.email}</td>
+                  <td>{formatDate(portal.gestor.updated_at)}</td>
+                </tr>
+                <tr>
+                  <td className={styles.destaque}>Secretário da Pasta</td>
+                  <td>{portal.secretario.nome}</td>
+                  <td>{portal.secretario.telefone}</td>
+                  <td>{portal.secretario.email}</td>
+                  <td>{formatDate(portal.secretario.updated_at)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </div>
+      );
+    } catch (error) {
+      console.log(error);
+      return <h1>{error}</h1>;
+    }
   } else return <h1>Carregando...</h1>;
 }
