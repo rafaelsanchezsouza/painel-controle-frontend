@@ -10,8 +10,8 @@ import styles from './styles.module.scss';
 import { FormEvent, useState } from 'react';
 
 export default function CriarPortal() {
-  const [cnpj, setCnpj] = useState('');
   const [nomeBase, setNomeBase] = useState('');
+  const [cnpj, setCnpj] = useState('');
   const [nomenclatura, setNomenclatura] = useState('');
   const [vencimento, setVencimento] = useState('');
   const [status, setStatus] = useState('');
@@ -26,38 +26,38 @@ export default function CriarPortal() {
     event.preventDefault();
 
     const portalData = {
-      cnpj: cnpj,
       nomeBase: nomeBase,
+      cnpj: cnpj,
       nomenclatura: nomenclatura,
       vencimento: vencimento,
       status: status,
     };
 
     const gestorData = {
+      nomeBase: nomeBase,
       nome: nomeGestor,
       email: emailGestor,
       telefone: telefoneGestor,
-      portal_cnpj: cnpj,
     };
 
     const secretarioData = {
+      nomeBase: nomeBase,
       nome: nomeSecretario,
       email: emailSecretario,
       telefone: telefoneSecretario,
-      portal_cnpj: cnpj,
     };
 
-    console.log(JSON.stringify(portalData));
-    console.log(gestorData);
-    console.log(secretarioData);
+    try {
+      await api.post('/portais', portalData);
+      await api.post(`/${nomeBase}/gestores`, gestorData);
+      await api.post(`/${nomeBase}/secretarios`, secretarioData);
 
-    // await api.post('/portais', portalData)
-    await api.post('/gestores', JSON.stringify(gestorData));
-    await api.post('/secretarios', JSON.stringify(secretarioData));
+      alert('Portal criado com sucesso!');
 
-    alert('Portal criado com sucesso!');
-
-    // history.push('/');
+      // history.push('/');
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
