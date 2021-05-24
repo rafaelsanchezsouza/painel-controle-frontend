@@ -49,58 +49,49 @@ export default function Portais() {
     const request = `/portais/${nomeBase}`;
     api.get(request).then((response) => {
       setPortal(response.data[0]);
-
-      console.log('request: ');
-      console.log(request);
-
-      console.log('response.data: ');
-      console.log(response.data);
     });
   }, []);
-
-  console.log('nomeBase: ');
-  console.log(nomeBase);
-
-  console.log('portal: ');
-  console.log(portal);
 
   if (portal) {
     try {
       return (
         <div className={styles.portal}>
           <section className={styles.header}>
-            <h2>{portal.nomenclatura}</h2>
-            <Link href={'/'}>
-              <button type="button">
-                <img src="/arrow-left.svg" alt="Voltar" />
-              </button>
-            </Link>
+            <h2>Visualizar Portal</h2>
+            <div className={styles.buttons}>
+              <Link href={'/'}>
+                <button type="button">
+                  <img src="/edit.svg" alt="Editar" />
+                </button>
+              </Link>
+              <Link href={'/'}>
+                <button type="button">
+                  <img src="/arrow-left.svg" alt="Voltar" />
+                </button>
+              </Link>
+            </div>
           </section>
 
-          <h3>Geral</h3>
+          <h3>Dados Gerais</h3>
           <section className={styles.infoGeral}>
             <table>
               <tbody>
                 <tr>
-                  <td className={styles.destaque}>Vencimento do Comodato</td>
-                  <td>{portal.vencimento}</td>
+                  <td className={styles.destaque}>Nome do Portal</td>
+                  <td>{portal.nomeBase}</td>
+                </tr>
+                <tr>
+                  <td className={styles.destaque}>Nome Base</td>
+                  <td>{portal.nomeBase}</td>
                 </tr>
                 <tr>
                   <td className={styles.destaque}>CNPJ</td>
                   <td>{portal.cnpj}</td>
                 </tr>
-
                 <tr>
-                  <td className={styles.destaque}>Portal</td>
-                  <td>
-                    <a
-                      href={`https://www.consigsimples.com.br/${portal.nomeBase}`}
-                    >
-                      {`https://www.consigsimples.com.br/${portal.nomeBase}`}
-                    </a>
-                  </td>
+                  <td className={styles.destaque}>Vencimento do Comodato</td>
+                  <td>{portal.vencimento}</td>
                 </tr>
-
                 <tr>
                   <td className={styles.destaque}>Status</td>
                   <td>{portal.status}</td>

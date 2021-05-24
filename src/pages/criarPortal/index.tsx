@@ -92,6 +92,16 @@ export default function CriarPortal() {
                 </td>
               </tr>
               <tr>
+                <td className={styles.destaque}>Nome Base</td>
+                <td>
+                  <input
+                    type="text"
+                    value={nomeBase}
+                    onChange={(event) => setNomeBase(event.target.value)}
+                  />
+                </td>
+              </tr>
+              <tr>
                 <td className={styles.destaque}>CNPJ</td>
                 <td>
                   <input
@@ -108,17 +118,6 @@ export default function CriarPortal() {
                     type="text"
                     value={vencimento}
                     onChange={(event) => setVencimento(event.target.value)}
-                  />
-                </td>
-              </tr>
-
-              <tr>
-                <td className={styles.destaque}>Portal</td>
-                <td>
-                  <input
-                    type="text"
-                    value={nomeBase}
-                    onChange={(event) => setNomeBase(event.target.value)}
                   />
                 </td>
               </tr>
