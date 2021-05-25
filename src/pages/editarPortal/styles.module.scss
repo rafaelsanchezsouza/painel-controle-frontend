@@ -1,0 +1,158 @@
+.createPortal {
+  padding: 0 4rem;
+  height: calc(100vh - 6.5rem);
+  overflow-y: scroll;
+
+  h2 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  h3 {
+    color: var(--dark-orange);
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  button {
+    width: 3rem;
+    height: 3rem;
+    margin-left: 0.5rem;
+    border-radius: 0.75rem;
+    border: 0;
+
+    transition: filter 0.2s;
+
+    right: 0;
+    bottom: 0;
+    background: var(--dark-orange);
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+  .submitButton {
+    width: 9rem;
+    font-size: 1.2rem;
+    color: white;
+    background: var(--light-blue);
+  }
+
+  .buttons {
+    width: 400px;
+    display: flex;
+    justify-content: flex-end;
+
+    margin-left: auto;
+  }
+
+  input {
+    border: 0px;
+    padding-left: 20px;
+    border-radius: 5px;
+    width: 90%;
+    height: 2.5em;
+    font-size: 1.3rem;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+  }
+
+  .destaque {
+    color: var(--purple);
+    font-family: Lexend, sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    line-height: 1.4rem;
+    font-size: 1.2rem;
+  }
+}
+
+.infoGeral {
+  padding-bottom: 2rem;
+
+  table {
+    width: 100%;
+
+    th,
+    td {
+      height: 2rem;
+      padding: 0.5rem 1rem;
+      color: var(--dark-blue);
+    }
+
+    th {
+      color: var(--dark-orange);
+      text-transform: uppercase;
+      font: 500 0.75rem Lexend, sans-serif;
+      text-align: left;
+      height: 2rem;
+    }
+
+    td {
+      font-size: 1.15rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--light-blue);
+    }
+  }
+  .destaque {
+    table-layout: fixed;
+    width: 400px;
+    padding: 0.5rem 1rem;
+    color: var(--purple);
+    font-family: Lexend, sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    line-height: 1.4rem;
+    font-size: 1.2rem;
+  }
+}
+
+.infoDepartamento {
+  padding-bottom: 2rem;
+
+  table {
+    width: 100%;
+
+    th,
+    td {
+      height: 4rem;
+      padding: 0.5rem 1rem;
+      color: var(--dark-blue);
+    }
+
+    th {
+      color: var(--dark-orange);
+      text-transform: uppercase;
+      font: 500 1rem Lexend, sans-serif;
+      text-align: left;
+      height: 2rem;
+    }
+
+    td {
+      font-size: 1.15rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--light-blue);
+    }
+  }
+}
+.dataAtualizacao {
+  padding-bottom: 2rem;
+  color: var(--dark-blue);
+}
+
+.status {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 1rem;
+  border: 1px solid var(--purple);
+}

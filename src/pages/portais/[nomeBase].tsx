@@ -1,39 +1,13 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import format from 'date-fns/format';
-import ptBR from 'date-fns/locale/pt-BR';
 
 // API
-import api from '../../service/api';
-import getPortal from '../../service/useGetPortal';
-
-import styles from './portais.module.scss';
-import { useEffect, useState } from 'react';
 import GetPortals from '../../service/useGetPortal';
 
-type Portal = {
-  nomeBase: string;
-  cnpj: string;
-  nomenclatura: string;
-  vencimento: string;
-  status: string;
-  gestor: {
-    id: string;
-    nome: string;
-    email: string;
-    telefone: string;
-    created_at: Date;
-    updated_at: Date;
-  };
-  secretario: {
-    id: string;
-    nome: string;
-    email: string;
-    telefone: string;
-    created_at: Date;
-    updated_at: Date;
-  };
-};
+// Styles
+import styles from './portais.module.scss';
+import format from 'date-fns/format';
+import ptBR from 'date-fns/locale/pt-BR';
 
 function formatDate(date: Date) {
   const formattedDate = format(new Date(date), 'dd/MM/yyyy', {

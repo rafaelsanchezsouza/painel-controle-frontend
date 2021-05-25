@@ -1,20 +1,19 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { FormEvent, useState } from 'react';
-
-// API
-import api from '../../service/api';
-import GetStatusList from '../../service/useGetStatusList';
-
-// Styles
-import styles from './styles.module.scss';
+import { FormEvent, useEffect, useState } from 'react';
 import {
   mascaraCnpj,
   mascaraTelefone,
   mascaraData,
 } from '../../service/mascaraInput';
 
-export default function CriarPortal() {
+// API
+import api from '../../service/api';
+import GetPortals from '../../service/useGetPortal';
+import GetStatusList from '../../service/useGetStatusList';
+
+import styles from './styles.module.scss';
+
+export default function EditarPortal() {
   const [nomeBase, setNomeBase] = useState('');
   const [cnpj, setCnpj] = useState('');
   const [nomenclatura, setNomenclatura] = useState('');
@@ -28,6 +27,8 @@ export default function CriarPortal() {
   const [telefoneSecretario, setTelefoneSecretario] = useState('');
 
   const statusList = GetStatusList();
+
+  const portal: Portal = GetPortals(nomeBase);
 
   function handleCnpj(event: React.ChangeEvent<HTMLInputElement>) {
     const cnpjFormatado = mascaraCnpj(event.target.value);
@@ -93,7 +94,7 @@ export default function CriarPortal() {
     <div className={styles.createPortal}>
       <form onSubmit={handleSubmit}>
         <section className={styles.header}>
-          <h2>Criar Portal</h2>
+          <h2>Editar Portal</h2>
           <div className={styles.buttons}>
             <button type="submit" className={styles.submitButton}>
               Enviar
