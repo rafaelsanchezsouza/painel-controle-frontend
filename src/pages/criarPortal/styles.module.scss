@@ -56,6 +56,15 @@
     font-size: 1.3rem;
   }
 
+  select {
+    border: 0px;
+    padding-left: 20px;
+    border-radius: 5px;
+    width: 90%;
+    height: 2.5em;
+    font-size: 1.3rem;
+  }
+
   .header {
     display: flex;
     align-items: center;

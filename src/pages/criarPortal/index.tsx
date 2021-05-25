@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import {
   mascaraCnpj,
   mascaraTelefone,
@@ -23,6 +23,14 @@ export default function CriarPortal() {
   const [nomeSecretario, setNomeSecretario] = useState('');
   const [emailSecretario, setEmailSecretario] = useState('');
   const [telefoneSecretario, setTelefoneSecretario] = useState('');
+  const [statusList, setStatusList] = useState<String[]>(['0']);
+
+  useEffect(() => {
+    const request = `/status`;
+    api.get(request).then((response) => {
+      setStatusList(response.data);
+    });
+  }, []);
 
   function handleCnpj(event: React.ChangeEvent<HTMLInputElement>) {
     const cnpjFormatado = mascaraCnpj(event.target.value);
@@ -151,11 +159,18 @@ export default function CriarPortal() {
               <tr>
                 <td className={styles.destaque}>Status</td>
                 <td>
-                  <input
-                    type="text"
+                  <select
                     value={status}
                     onChange={(event) => setStatus(event.target.value)}
-                  />
+                  >
+                    {statusList.map((option: any) => {
+                      return (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      );
+                    })}
+                  </select>
                 </td>
               </tr>
             </tbody>
