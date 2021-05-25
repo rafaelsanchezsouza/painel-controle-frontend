@@ -1,13 +1,15 @@
 import Link from 'next/link';
-import format from 'date-fns/format';
-import ptBR from 'date-fns/locale/pt-BR';
+import { FormEvent, useState } from 'react';
+import {
+  mascaraCnpj,
+  mascaraTelefone,
+  mascaraData,
+} from '../../service/mascaraInput';
 
 // API
 import api from '../../service/api';
-import { GetServerSideProps } from 'next';
 
 import styles from './styles.module.scss';
-import { FormEvent, useState } from 'react';
 
 export default function CriarPortal() {
   const [nomeBase, setNomeBase] = useState('');
@@ -21,6 +23,28 @@ export default function CriarPortal() {
   const [nomeSecretario, setNomeSecretario] = useState('');
   const [emailSecretario, setEmailSecretario] = useState('');
   const [telefoneSecretario, setTelefoneSecretario] = useState('');
+
+  function handleCnpj(event: React.ChangeEvent<HTMLInputElement>) {
+    const cnpjFormatado = mascaraCnpj(event.target.value);
+    setCnpj(cnpjFormatado);
+  }
+
+  function handleTelefoneGestor(event: React.ChangeEvent<HTMLInputElement>) {
+    const telefoneFormatado = mascaraTelefone(event.target.value);
+    setTelefoneGestor(telefoneFormatado);
+  }
+
+  function handleTelefoneSecretario(
+    event: React.ChangeEvent<HTMLInputElement>
+  ) {
+    const telefoneFormatado = mascaraTelefone(event.target.value);
+    setTelefoneSecretario(telefoneFormatado);
+  }
+
+  function handleData(event: React.ChangeEvent<HTMLInputElement>) {
+    const vencimentoFormatado = mascaraData(event.target.value);
+    setVencimento(vencimentoFormatado);
+  }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -107,7 +131,8 @@ export default function CriarPortal() {
                   <input
                     type="text"
                     value={cnpj}
-                    onChange={(event) => setCnpj(event.target.value)}
+                    onChange={handleCnpj}
+                    maxLength={18}
                   />
                 </td>
               </tr>
@@ -117,7 +142,8 @@ export default function CriarPortal() {
                   <input
                     type="text"
                     value={vencimento}
-                    onChange={(event) => setVencimento(event.target.value)}
+                    onChange={handleData}
+                    maxLength={14}
                   />
                 </td>
               </tr>
@@ -162,15 +188,16 @@ export default function CriarPortal() {
                 <td>
                   <input
                     type="text"
-                    value={emailGestor}
-                    onChange={(event) => setEmailGestor(event.target.value)}
+                    value={telefoneGestor}
+                    onChange={handleTelefoneGestor}
+                    maxLength={15}
                   />
                 </td>
                 <td>
                   <input
                     type="text"
-                    value={telefoneGestor}
-                    onChange={(event) => setTelefoneGestor(event.target.value)}
+                    value={emailGestor}
+                    onChange={(event) => setEmailGestor(event.target.value)}
                   />
                 </td>
               </tr>
@@ -186,17 +213,16 @@ export default function CriarPortal() {
                 <td>
                   <input
                     type="text"
-                    value={emailSecretario}
-                    onChange={(event) => setEmailSecretario(event.target.value)}
+                    value={telefoneSecretario}
+                    onChange={handleTelefoneSecretario}
+                    maxLength={15}
                   />
                 </td>
                 <td>
                   <input
                     type="text"
-                    value={telefoneSecretario}
-                    onChange={(event) =>
-                      setTelefoneSecretario(event.target.value)
-                    }
+                    value={emailSecretario}
+                    onChange={(event) => setEmailSecretario(event.target.value)}
                   />
                 </td>
               </tr>
