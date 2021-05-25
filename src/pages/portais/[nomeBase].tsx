@@ -5,9 +5,11 @@ import ptBR from 'date-fns/locale/pt-BR';
 
 // API
 import api from '../../service/api';
+import getPortal from '../../service/useGetPortal';
 
 import styles from './portais.module.scss';
 import { useEffect, useState } from 'react';
+import GetPortals from '../../service/useGetPortal';
 
 type Portal = {
   nomeBase: string;
@@ -41,23 +43,17 @@ function formatDate(date: Date) {
 }
 
 export default function Portais() {
-  const [portal, setPortal] = useState<Portal>();
   const router = useRouter();
   const nomeBase = router.query.nomeBase;
 
-  useEffect(() => {
-    const request = `/portais/${nomeBase}`;
-    api.get(request).then((response) => {
-      setPortal(response.data[0]);
-    });
-  }, []);
+  const portal: Portal = GetPortals(nomeBase);
 
   if (portal) {
     try {
       return (
         <div className={styles.portal}>
           <section className={styles.header}>
-            <h2>Visualizar Portal</h2>
+            <h2>Detalhes Portal: {portal.nomenclatura}</h2>
             <div className={styles.buttons}>
               <Link href={'/'}>
                 <button type="button">
@@ -78,7 +74,7 @@ export default function Portais() {
               <tbody>
                 <tr>
                   <td className={styles.destaque}>Nome do Portal</td>
-                  <td>{portal.nomeBase}</td>
+                  <td>{portal.nomenclatura}</td>
                 </tr>
                 <tr>
                   <td className={styles.destaque}>Nome Base</td>
