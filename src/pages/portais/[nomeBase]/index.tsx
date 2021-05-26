@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-// API
+// Dados dos Portais
 import api from '../../../service/api';
 import GetPortals from '../../../service/useGetPortal';
 
@@ -9,7 +9,8 @@ import GetPortals from '../../../service/useGetPortal';
 import styles from './portais.module.scss';
 import format from 'date-fns/format';
 import ptBR from 'date-fns/locale/pt-BR';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { PortalContext } from '../../../context/PortalContext';
 
 function formatDate(date: Date) {
   const formattedDate = format(new Date(date), 'dd/MM/yyyy', {
@@ -20,11 +21,14 @@ function formatDate(date: Date) {
 
 export default function Portais() {
   const router = useRouter();
+  const { escolhePortal } = useContext(PortalContext);
   const nomeBase = Array.isArray(router.query.nomeBase)
     ? router.query.nomeBase[0]
     : router.query.nomeBase;
 
   const portal: Portal = GetPortals(nomeBase);
+  escolhePortal(portal);
+  localStorage.setItem('portal', JSON.stringify(portal));
 
   if (portal) {
     try {

@@ -1,10 +1,14 @@
 import Link from 'next/link';
-import { FormEvent, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import {
+  createContext,
+  FormEvent,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 // API
 import api from '../../../../service/api';
-import GetStatusList from '../../../../service/useGetStatusList';
 
 // Styles
 import styles from './styles.module.scss';
@@ -13,27 +17,14 @@ import {
   mascaraTelefone,
   mascaraData,
 } from '../../../../service/mascaraInput';
-import GetPortals from '../../../../service/useGetPortal';
+import { PortalContext } from '../../../../context/PortalContext';
 
 export default function EditarPortal() {
-  const router = useRouter();
-  const nomeBase = Array.isArray(router.query.nomeBase)
-    ? router.query.nomeBase[0]
-    : router.query.nomeBase;
+  const { portal, loading } = useContext(PortalContext);
 
-  console.log('nomeBase: ');
-  console.log(nomeBase);
-
-  console.log('Vai Entrar');
-  // const portal: Portal = GetPortals(nomeBase);
-
-  const portal = {} as Portal;
-
-  portal.nomenclatura = 'PM de João Pessoa';
-
-  console.log('Saiu');
-  console.log('portal: ');
-  console.log(portal);
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
 
   // const statusList = await GetStatusList();
   const statusList = [
@@ -42,16 +33,21 @@ export default function EditarPortal() {
     { label: 'Em Alerta', value: 'Em Alerta' },
   ];
 
-  const [cnpj, setCnpj] = useState('');
+  const [nomeBase, setNomeBase] = useState(portal.nomeBase);
+  const [cnpj, setCnpj] = useState(portal.cnpj);
   const [nomenclatura, setNomenclatura] = useState(portal.nomenclatura);
-  const [vencimento, setVencimento] = useState('');
-  const [status, setStatus] = useState('');
-  const [nomeGestor, setNomeGestor] = useState('');
-  const [emailGestor, setEmailGestor] = useState('');
-  const [telefoneGestor, setTelefoneGestor] = useState('');
-  const [nomeSecretario, setNomeSecretario] = useState('');
-  const [emailSecretario, setEmailSecretario] = useState('');
-  const [telefoneSecretario, setTelefoneSecretario] = useState('');
+  const [vencimento, setVencimento] = useState(portal.vencimento);
+  const [status, setStatus] = useState(portal.status);
+  const [nomeGestor, setNomeGestor] = useState(portal.gestor.nome);
+  const [emailGestor, setEmailGestor] = useState(portal.gestor.email);
+  const [telefoneGestor, setTelefoneGestor] = useState(portal.gestor.telefone);
+  const [nomeSecretario, setNomeSecretario] = useState(portal.secretario.nome);
+  const [emailSecretario, setEmailSecretario] = useState(
+    portal.secretario.email
+  );
+  const [telefoneSecretario, setTelefoneSecretario] = useState(
+    portal.secretario.telefone
+  );
 
   function handleCnpj(event: React.ChangeEvent<HTMLInputElement>) {
     const cnpjFormatado = mascaraCnpj(event.target.value);
@@ -101,11 +97,12 @@ export default function EditarPortal() {
     };
 
     try {
-      await api.post('/portais', portalData);
-      await api.post(`/${nomeBase}/gestores`, gestorData);
-      await api.post(`/${nomeBase}/secretarios`, secretarioData);
+      alert('Vai Alterar Portal');
+      // await api.put('/portais', portalData);
+      await api.put(`/${nomeBase}/gestores`, gestorData);
+      await api.put(`/${nomeBase}/secretarios`, secretarioData);
 
-      alert('Portal criado com sucesso!');
+      alert('Portal alterado com sucesso!');
 
       // history.push('/');
     } catch (err) {
@@ -145,16 +142,16 @@ export default function EditarPortal() {
                     />
                   </td>
                 </tr>
-                {/* <tr>
+                <tr>
                   <td className={styles.destaque}>Nome Base</td>
-                  <td>{portal.nomeBase}</td>
+                  <td>{nomeBase}</td>
                 </tr>
                 <tr>
                   <td className={styles.destaque}>CNPJ</td>
                   <td>
                     <input
                       type="text"
-                      value={portal.cnpj}
+                      value={cnpj}
                       onChange={handleCnpj}
                       maxLength={18}
                     />
@@ -165,18 +162,18 @@ export default function EditarPortal() {
                   <td>
                     <input
                       type="text"
-                      value={portal.vencimento}
+                      value={vencimento}
                       onChange={handleData}
                       maxLength={14}
                     />
                   </td>
-                </tr> */}
+                </tr>
 
-                {/* <tr>
+                <tr>
                   <td className={styles.destaque}>Status</td>
                   <td>
                     <select
-                      value={portal.status}
+                      value={status}
                       onChange={(event) => setStatus(event.target.value)}
                     >
                       {statusList.map((option: any) => {
@@ -188,12 +185,12 @@ export default function EditarPortal() {
                       })}
                     </select>
                   </td>
-                </tr> */}
+                </tr>
               </tbody>
             </table>
           </section>
 
-          {/* <h3>Comercial</h3>
+          <h3>Comercial</h3>
           <section className={styles.infoDepartamento}>
             <table cellSpacing={0}>
               <thead>
@@ -212,14 +209,14 @@ export default function EditarPortal() {
                   <td>
                     <input
                       type="text"
-                      value={portal.gestor.nome}
+                      value={nomeGestor}
                       onChange={(event) => setNomeGestor(event.target.value)}
                     />
                   </td>
                   <td>
                     <input
                       type="text"
-                      value={portal.gestor.telefone}
+                      value={telefoneGestor}
                       onChange={handleTelefoneGestor}
                       maxLength={15}
                     />
@@ -227,7 +224,7 @@ export default function EditarPortal() {
                   <td>
                     <input
                       type="text"
-                      value={portal.gestor.email}
+                      value={emailGestor}
                       onChange={(event) => setEmailGestor(event.target.value)}
                     />
                   </td>
@@ -237,7 +234,7 @@ export default function EditarPortal() {
                   <td>
                     <input
                       type="text"
-                      value={portal.secretario.nome}
+                      value={nomeSecretario}
                       onChange={(event) =>
                         setNomeSecretario(event.target.value)
                       }
@@ -246,7 +243,7 @@ export default function EditarPortal() {
                   <td>
                     <input
                       type="text"
-                      value={portal.secretario.telefone}
+                      value={telefoneSecretario}
                       onChange={handleTelefoneSecretario}
                       maxLength={15}
                     />
@@ -254,7 +251,7 @@ export default function EditarPortal() {
                   <td>
                     <input
                       type="text"
-                      value={portal.secretario.email}
+                      value={emailSecretario}
                       onChange={(event) =>
                         setEmailSecretario(event.target.value)
                       }
@@ -263,10 +260,9 @@ export default function EditarPortal() {
                 </tr>
               </tbody>
             </table>
-          </section> */}
+          </section>
         </form>
       </div>
     );
   } else return <h1>Carregando...</h1>;
-  // return <h1>Carregando...</h1>;
 }

@@ -1,5 +1,7 @@
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
+import { useContext } from 'react';
+import { PortalContext } from '../context/PortalContext';
 
 import api from '../service/api';
 import styles from './home.module.scss';
@@ -9,31 +11,11 @@ type HomeProps = {
   portais: Array<Portal>;
 };
 
-type Portal = {
-  nomeBase: string;
-  cnpj: string;
-  nomenclatura: string;
-  vencimento: string;
-  status: string;
-  gestor: {
-    id: string;
-    nome: string;
-    email: string;
-    telefone: string;
-    created_at: Date;
-    updated_at: Date;
-  };
-  secretario: {
-    id: string;
-    nome: string;
-    email: string;
-    telefone: string;
-    created_at: Date;
-    updated_at: Date;
-  };
-};
-
 export default function Home({ portais }: HomeProps) {
+  const { escolhePortal } = useContext(PortalContext);
+
+  escolhePortal(portais[0]);
+
   return (
     <div className={styles.homepage}>
       <section className={styles.header}>
