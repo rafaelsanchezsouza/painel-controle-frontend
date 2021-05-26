@@ -1,3 +1,4 @@
+import history from '../../../history';
 import Link from 'next/link';
 import {
   createContext,
@@ -9,6 +10,7 @@ import {
 
 // API
 import api from '../../../../service/api';
+import GetStatusList from '../../../../service/useGetStatusList';
 
 // Styles
 import styles from './styles.module.scss';
@@ -26,12 +28,7 @@ export default function EditarPortal() {
     return <h1>Loading...</h1>;
   }
 
-  // const statusList = await GetStatusList();
-  const statusList = [
-    { label: 'Ativo', value: 'Ativo' },
-    { label: 'Inativo', value: 'Inativo' },
-    { label: 'Em Alerta', value: 'Em Alerta' },
-  ];
+  const statusList = GetStatusList();
 
   const [nomeBase, setNomeBase] = useState(portal.nomeBase);
   const [cnpj, setCnpj] = useState(portal.cnpj);
@@ -97,14 +94,12 @@ export default function EditarPortal() {
     };
 
     try {
-      alert('Vai Alterar Portal');
-      // await api.put('/portais', portalData);
+      await api.put(`/portais/${nomeBase}`, portalData);
       await api.put(`/${nomeBase}/gestores`, gestorData);
       await api.put(`/${nomeBase}/secretarios`, secretarioData);
 
       alert('Portal alterado com sucesso!');
-
-      // history.push('/');
+      // history.push(`/`);
     } catch (err) {
       console.log(err);
     }
