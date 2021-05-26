@@ -25,15 +25,15 @@ type Portal = {
   };
 };
 
-export default function GetPortals<Portal>(nomeBase: string | string[]) {
+export default function GetPortals<Portal>(nomeDaBase: string) {
   const [portal, setPortal] = useState<Portal>();
 
   useEffect(() => {
-    const request = `/portais/${nomeBase}`;
+    const request = `/portais/${nomeDaBase}`;
     api.get(request).then((response) => {
       setPortal(response.data[0]);
     });
-  }, []);
+  }, [nomeDaBase]);
 
   return portal;
 }
