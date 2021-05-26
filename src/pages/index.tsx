@@ -1,6 +1,5 @@
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
-import { useContext } from 'react';
 
 import api from '../service/api';
 import styles from './home.module.scss';

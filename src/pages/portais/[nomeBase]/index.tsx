@@ -2,12 +2,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 // API
-import GetPortals from '../../service/useGetPortal';
+import api from '../../../service/api';
+import GetPortals from '../../../service/useGetPortal';
 
 // Styles
 import styles from './portais.module.scss';
 import format from 'date-fns/format';
 import ptBR from 'date-fns/locale/pt-BR';
+import { useEffect, useState } from 'react';
 
 function formatDate(date: Date) {
   const formattedDate = format(new Date(date), 'dd/MM/yyyy', {
@@ -18,7 +20,9 @@ function formatDate(date: Date) {
 
 export default function Portais() {
   const router = useRouter();
-  const nomeBase = router.query.nomeBase;
+  const nomeBase = Array.isArray(router.query.nomeBase)
+    ? router.query.nomeBase[0]
+    : router.query.nomeBase;
 
   const portal: Portal = GetPortals(nomeBase);
 
@@ -29,7 +33,7 @@ export default function Portais() {
           <section className={styles.header}>
             <h2>Detalhes Portal: {portal.nomenclatura}</h2>
             <div className={styles.buttons}>
-              <Link href={'/'}>
+              <Link href={`/portais/${nomeBase}/editarPortal`}>
                 <button type="button">
                   <img src="/edit.svg" alt="Editar" />
                 </button>
