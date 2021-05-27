@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import history from '../../../history';
 import Link from 'next/link';
 import {
@@ -23,9 +24,10 @@ import { PortalContext } from '../../../../context/PortalContext';
 
 export default function EditarPortal() {
   const { portal, loading } = useContext(PortalContext);
+  const router = useRouter();
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <h1>Carregando...</h1>;
   }
 
   const statusList = GetStatusList();
@@ -99,7 +101,7 @@ export default function EditarPortal() {
       await api.put(`/${nomeBase}/secretarios`, secretarioData);
 
       alert('Portal alterado com sucesso!');
-      // history.push(`/`);
+      router.push(`/portais/${nomeBase}`);
     } catch (err) {
       console.log(err);
     }
