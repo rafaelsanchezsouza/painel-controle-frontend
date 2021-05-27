@@ -46,6 +46,24 @@
     line-height: 1.4rem;
     font-size: 1.2rem;
   }
+
+  button {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    border: 0;
+
+    transition: filter 0.2s;
+
+    margin-left: auto;
+    right: 0;
+    bottom: 0;
+    background: var(--light-orange);
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
 }
 
 .header {

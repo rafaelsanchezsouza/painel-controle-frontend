@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useRouter } from 'next/router';
+import { FormEvent, useContext } from 'react';
 import { PortalContext } from '../context/PortalContext';
 
 import api from '../service/api';
@@ -14,6 +15,7 @@ type HomeProps = {
 
 export default function Home({ portais }: HomeProps) {
   const { escolhePortal, defineStatus } = useContext(PortalContext);
+  const router = useRouter();
 
   const statusList = GetStatusList();
 
@@ -38,6 +40,7 @@ export default function Home({ portais }: HomeProps) {
               <th>Nome da Base</th>
               <th>CNPJ</th>
               <th>Status</th>
+              <th></th>
             </tr>
           </thead>
 
@@ -60,6 +63,25 @@ export default function Home({ portais }: HomeProps) {
 
                   <td>{portal.cnpj}</td>
                   <td>{portal.status}</td>
+                  <td>
+                    <button
+                      type="button"
+                      onClick={async function handleDelete(event: FormEvent) {
+                        event.preventDefault();
+                        try {
+                          await api.delete(`/portais/${portal.nomeBase}`);
+
+                          alert('Portal excluido com sucesso!');
+                          router.reload();
+                        } catch (err) {
+                          console.log(err);
+                          alert(err.response.data.message);
+                        }
+                      }}
+                    >
+                      <img src="/trash.svg" alt="Excluir Portal" />
+                    </button>
+                  </td>
                 </tr>
               );
             })}
