@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
 
 // API
@@ -27,6 +28,7 @@ export default function CriarPortal() {
   const [telefoneSecretario, setTelefoneSecretario] = useState('');
 
   const statusList = GetStatusList();
+  const router = useRouter();
 
   function handleCnpj(event: React.ChangeEvent<HTMLInputElement>) {
     const cnpjFormatado = mascaraCnpj(event.target.value);
@@ -82,9 +84,10 @@ export default function CriarPortal() {
 
       alert('Portal criado com sucesso!');
 
-      // history.push('/');
+      router.push('/');
     } catch (err) {
       console.log(err);
+      alert(err.response.data.message);
     }
   }
 

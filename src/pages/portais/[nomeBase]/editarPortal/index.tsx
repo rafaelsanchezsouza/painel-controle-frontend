@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import history from '../../../history';
 import Link from 'next/link';
 import {
   createContext,
@@ -104,6 +103,7 @@ export default function EditarPortal() {
       router.push(`/portais/${nomeBase}`);
     } catch (err) {
       console.log(err);
+      alert(err.response.data.message);
     }
   }
 
