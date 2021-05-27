@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
   function escolhePortal(portal: Portal) {
     useEffect(() => {
       setPortal(portal);
-    }, []);
+    });
   }
   return (
     <PortalContext.Provider value={{ portal, escolhePortal, loading }}>
