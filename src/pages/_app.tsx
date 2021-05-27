@@ -13,10 +13,7 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     const portal = localStorage.getItem('portal');
 
-    console.log('portal: ');
-    console.log(portal);
     if (portal) {
-      console.log('entrou no portal');
       setPortal(JSON.parse(portal));
     }
 
@@ -24,7 +21,9 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   function escolhePortal(portal: Portal) {
-    setPortal(portal);
+    useEffect(() => {
+      setPortal(portal);
+    }, []);
   }
   return (
     <PortalContext.Provider value={{ portal, escolhePortal, loading }}>

@@ -168,6 +168,7 @@ export default function EditarPortal() {
                   <td className={styles.destaque}>Status</td>
                   <td>
                     <select
+                      key={status}
                       value={status}
                       onChange={(event) => setStatus(event.target.value)}
                     >
