@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { PortalContext } from '../context/PortalContext';
 
 import api from '../service/api';
+import GetStatusList from '../service/useGetStatusList';
 import styles from './home.module.scss';
 
 // Types
@@ -12,9 +13,12 @@ type HomeProps = {
 };
 
 export default function Home({ portais }: HomeProps) {
-  const { escolhePortal } = useContext(PortalContext);
+  const { escolhePortal, defineStatus } = useContext(PortalContext);
+
+  const statusList = GetStatusList();
 
   escolhePortal(portais[0]);
+  defineStatus(statusList);
 
   return (
     <div className={styles.homepage}>

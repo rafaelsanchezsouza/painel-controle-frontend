@@ -2,7 +2,7 @@ import api from './api';
 import { useEffect, useState } from 'react';
 
 export default function GetStatusList() {
-  const [statusList, setStatusList] = useState<String[]>(['0']);
+  const [statusList, setStatusList] = useState<string[]>(['0']);
 
   useEffect(() => {
     const request = `/status`;

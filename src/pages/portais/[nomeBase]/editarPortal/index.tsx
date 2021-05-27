@@ -1,12 +1,6 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import {
-  createContext,
-  FormEvent,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { FormEvent, useContext, useState } from 'react';
 
 // API
 import api from '../../../../service/api';
@@ -22,14 +16,12 @@ import {
 import { PortalContext } from '../../../../context/PortalContext';
 
 export default function EditarPortal() {
-  const { portal, loading } = useContext(PortalContext);
+  const { portal, loading, statusList } = useContext(PortalContext);
   const router = useRouter();
 
   if (loading) {
     return <h1>Carregando...</h1>;
   }
-
-  const statusList = GetStatusList();
 
   const [nomeBase, setNomeBase] = useState(portal.nomeBase);
   const [cnpj, setCnpj] = useState(portal.cnpj);
@@ -176,7 +168,7 @@ export default function EditarPortal() {
                     >
                       {statusList.map((option: any) => {
                         return (
-                          <option key={option.value} value={option.value}>
+                          <option key={option.label} value={option.value}>
                             {option.label}
                           </option>
                         );

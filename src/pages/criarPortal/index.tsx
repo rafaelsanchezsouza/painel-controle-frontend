@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 
 // API
 import api from '../../service/api';
-import GetStatusList from '../../service/useGetStatusList';
+import { PortalContext } from '../../context/PortalContext';
 
 // Styles
 import styles from './styles.module.scss';
@@ -15,6 +15,8 @@ import {
 } from '../../service/mascaraInput';
 
 export default function CriarPortal() {
+  const { statusList } = useContext(PortalContext);
+
   const [nomeBase, setNomeBase] = useState('');
   const [cnpj, setCnpj] = useState('');
   const [nomenclatura, setNomenclatura] = useState('');
@@ -27,7 +29,6 @@ export default function CriarPortal() {
   const [emailSecretario, setEmailSecretario] = useState('');
   const [telefoneSecretario, setTelefoneSecretario] = useState('');
 
-  const statusList = GetStatusList();
   const router = useRouter();
 
   function handleCnpj(event: React.ChangeEvent<HTMLInputElement>) {
@@ -164,7 +165,7 @@ export default function CriarPortal() {
                   >
                     {statusList.map((option: any) => {
                       return (
-                        <option key={option.value} value={option.value}>
+                        <option key={option.label} value={option.value}>
                           {option.label}
                         </option>
                       );
