@@ -23,6 +23,9 @@ function MyApp({ Component, pageProps }) {
   function escolhePortal(portal: Portal) {
     useEffect(() => {
       setPortal(portal);
+      if (typeof window !== 'undefined' && portal) {
+        localStorage.setItem('portal', JSON.stringify(portal));
+      }
     });
   }
   return (

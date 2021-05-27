@@ -28,7 +28,6 @@ export default function Portais() {
 
   const portal: Portal = GetPortals(nomeBase);
   escolhePortal(portal);
-  localStorage.setItem('portal', JSON.stringify(portal));
 
   if (portal) {
     try {
