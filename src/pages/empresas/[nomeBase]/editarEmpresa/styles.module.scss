@@ -1,4 +1,4 @@
-.createPortal {
+.createEmpresa {
   padding: 0 4rem;
   height: calc(100vh - 6.5rem);
   overflow-y: scroll;
@@ -9,7 +9,7 @@
   }
 
   h3 {
-    color: var(--dark-orange);
+    color: var(--green);
     text-transform: uppercase;
     margin-top: 0.5rem;
     margin-bottom: 1.5rem;
@@ -26,7 +26,7 @@
 
     right: 0;
     bottom: 0;
-    background: var(--dark-orange);
+    background: var(--green);
 
     &:hover {
       filter: brightness(0.9);
@@ -71,7 +71,7 @@
   }
 
   .destaque {
-    color: var(--purple);
+    color: var(--green);
     font-family: Lexend, sans-serif;
     font-weight: 600;
     text-decoration: none;
@@ -94,7 +94,7 @@
     }
 
     th {
-      color: var(--dark-orange);
+      color: var(--green);
       text-transform: uppercase;
       font: 500 0.75rem Lexend, sans-serif;
       text-align: left;
@@ -114,7 +114,7 @@
     table-layout: fixed;
     width: 400px;
     padding: 0.5rem 1rem;
-    color: var(--purple);
+    color: var(--green);
     font-family: Lexend, sans-serif;
     font-weight: 600;
     text-decoration: none;
@@ -137,7 +137,7 @@
     }
 
     th {
-      color: var(--dark-orange);
+      color: var(--green);
       text-transform: uppercase;
       font: 500 1rem Lexend, sans-serif;
       text-align: left;
@@ -163,5 +163,5 @@
   width: 2rem;
   height: 2rem;
   border-radius: 1rem;
-  border: 1px solid var(--purple);
+  border: 1px solid var(--green);
 }

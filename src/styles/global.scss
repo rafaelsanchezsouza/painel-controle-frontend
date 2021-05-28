@@ -6,12 +6,11 @@
 
 :root {
   --white: #ffffff;
+  --black: #000000;
   --gray: #f5f5f5;
-  --dark-blue: #213f9a;
-  --light-blue: #305cab;
-  --dark-orange: #da5c2f;
-  --light-orange: #e87949;
-  --purple: #733d78;
+  --dark-blue: #252e8c;
+  --light-blue: #354eef;
+  --green: #00d15f;
 }
 
 @media (max-width: 1080px) {
@@ -29,7 +28,7 @@ input,
 textarea,
 button {
   font: 500 1rem Inter, sans-serif;
-  color: var(--purple);
+  color: var(--black);
 }
 
 h1,

@@ -1,7 +1,7 @@
 import api from './api';
 import { useEffect, useState } from 'react';
 
-type Portal = {
+type Empresa = {
   nomeBase: string;
   cnpj: string;
   nomenclatura: string;
@@ -25,15 +25,15 @@ type Portal = {
   };
 };
 
-export default function GetPortals<Portal>(nomeDaBase: string) {
-  const [portal, setPortal] = useState<Portal>();
+export default function GetEmpresas<Empresa>(nomeDaBase: string) {
+  const [empresa, setEmpresa] = useState<Empresa>();
 
   useEffect(() => {
-    const request = `/portais/${nomeDaBase}`;
+    const request = `/empresas/${nomeDaBase}`;
     api.get(request).then((response) => {
-      setPortal(response.data[0]);
+      setEmpresa(response.data[0]);
     });
   }, [nomeDaBase]);
 
-  return portal;
+  return empresa;
 }

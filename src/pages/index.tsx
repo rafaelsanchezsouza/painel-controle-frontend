@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FormEvent, useContext } from 'react';
-import { PortalContext } from '../context/PortalContext';
+import { EmpresaContext } from '../context/EmpresaContext';
 
 import api from '../service/api';
 import GetStatusList from '../service/useGetStatusList';
@@ -10,68 +10,64 @@ import styles from './home.module.scss';
 
 // Types
 type HomeProps = {
-  portais: Array<Portal>;
+  empresas: Array<Empresa>;
 };
 
-export default function Home({ portais }: HomeProps) {
-  const { escolhePortal, defineStatus } = useContext(PortalContext);
+export default function Home({ empresas }: HomeProps) {
+  const { escolheEmpresa, defineStatus } = useContext(EmpresaContext);
   const router = useRouter();
 
   const statusList = GetStatusList();
 
-  escolhePortal(portais[0]);
+  escolheEmpresa(empresas[0]);
   defineStatus(statusList);
 
   return (
     <div className={styles.homepage}>
       <section className={styles.header}>
-        <h2>Portais </h2>
-        <Link href={'/criarPortal'}>
+        <h2>Empresas </h2>
+        <Link href={'/criarEmpresa'}>
           <button type="button">
-            <img src="/create.svg" alt="Criar Portal" />
+            <img src="/create.svg" alt="Criar Empresa" />
           </button>
         </Link>
       </section>
-      <section className={styles.portais}>
+      <section className={styles.empresas}>
         <table cellSpacing={0}>
           <thead>
             <tr>
-              <th>Nomenclatura</th>
-              <th>Nome da Base</th>
+              <th>id</th>
+              <th>Nome</th>
               <th>CNPJ</th>
               <th>Status</th>
+              <th>Saude</th>
               <th></th>
             </tr>
           </thead>
 
           <tbody>
-            {portais.map((portal: Portal) => {
+            {empresas.map((empresa: Empresa) => {
               return (
-                <tr key={portal.cnpj}>
+                <tr key={empresa.id}>
+                  <td>{empresa.id}</td>
                   <td className={styles.nomenclatura}>
-                    <Link href={`/portais/${portal.nomeBase}`}>
-                      <a>{portal.nomenclatura}</a>
+                    <Link href={`/empresas/${empresa.id}`}>
+                      <a>{empresa.nome}</a>
                     </Link>
                   </td>
-                  <td>
-                    <a
-                      href={`https://www.consigsimples.com.br/${portal.nomeBase}`}
-                    >
-                      {portal.nomeBase}
-                    </a>
-                  </td>
+                  <td>{empresa.cnpj}</td>
 
-                  <td>{portal.cnpj}</td>
-                  <td>{portal.status}</td>
+                  <td>Não Implementado</td>
+                  <td>Não Implementado</td>
                   <td>
                     <button
                       type="button"
                       onClick={async function handleDelete(event: FormEvent) {
                         event.preventDefault();
                         try {
-                          await api.delete(`/portais/${portal.nomeBase}`);
+                          await api.delete(`/empresas/${empresa.id}`);
 
-                          alert('Portal excluido com sucesso!');
+                          alert('Empresa excluido com sucesso!');
                           router.reload();
                         } catch (err) {
                           console.log(err);
@@ -79,7 +75,7 @@ export default function Home({ portais }: HomeProps) {
                         }
                       }}
                     >
-                      <img src="/trash.svg" alt="Excluir Portal" />
+                      <img src="/trash.svg" alt="Excluir Empresa" />
                     </button>
                   </td>
                 </tr>
@@ -93,11 +89,11 @@ export default function Home({ portais }: HomeProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { data } = await api.get('/portais');
+  const { data } = await api.get('/empresas');
 
   return {
     props: {
-      portais: data,
+      empresas: data,
     },
   };
 };

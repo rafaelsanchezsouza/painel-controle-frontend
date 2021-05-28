@@ -4,18 +4,18 @@ import '../styles/global.scss';
 
 import { Header } from '../components/Header';
 
-import { PortalContext } from '../context/PortalContext';
+import { EmpresaContext } from '../context/EmpresaContext';
 
 function MyApp({ Component, pageProps }) {
-  const [portal, setPortal] = useState<Portal>();
+  const [empresa, setEmpresa] = useState<Empresa>();
   const [loading, setLoading] = useState(true);
   const [statusList, setStatusList] = useState<string[]>(['0']);
 
   useEffect(() => {
-    const portal = localStorage.getItem('portal');
+    const empresa = localStorage.getItem('empresa');
     const statusList = localStorage.getItem('statusList');
-    if (portal) {
-      setPortal(JSON.parse(portal));
+    if (empresa) {
+      setEmpresa(JSON.parse(empresa));
     }
     if (statusList) {
       setStatusList(JSON.parse(statusList));
@@ -32,23 +32,23 @@ function MyApp({ Component, pageProps }) {
     });
   }
 
-  function escolhePortal(portal: Portal) {
+  function escolheEmpresa(empresa: Empresa) {
     useEffect(() => {
-      setPortal(portal);
-      if (typeof window !== 'undefined' && portal) {
-        localStorage.setItem('portal', JSON.stringify(portal));
+      setEmpresa(empresa);
+      if (typeof window !== 'undefined' && empresa) {
+        localStorage.setItem('empresa', JSON.stringify(empresa));
       }
     });
   }
   return (
-    <PortalContext.Provider
-      value={{ portal, statusList, loading, escolhePortal, defineStatus }}
+    <EmpresaContext.Provider
+      value={{ empresa, statusList, loading, escolheEmpresa, defineStatus }}
     >
       <main>
         <Header />
         <Component {...pageProps} />
       </main>
-    </PortalContext.Provider>
+    </EmpresaContext.Provider>
   );
 }
 

@@ -4,7 +4,7 @@ import { FormEvent, useContext, useState } from 'react';
 
 // API
 import api from '../../service/api';
-import { PortalContext } from '../../context/PortalContext';
+import { EmpresaContext } from '../../context/EmpresaContext';
 
 // Styles
 import styles from './styles.module.scss';
@@ -14,8 +14,8 @@ import {
   mascaraData,
 } from '../../service/mascaraInput';
 
-export default function CriarPortal() {
-  const { statusList } = useContext(PortalContext);
+export default function CriarEmpresa() {
+  const { statusList } = useContext(EmpresaContext);
 
   const [nomeBase, setNomeBase] = useState('');
   const [cnpj, setCnpj] = useState('');
@@ -56,7 +56,7 @@ export default function CriarPortal() {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
-    const portalData = {
+    const empresaData = {
       nomeBase: nomeBase,
       cnpj: cnpj,
       nomenclatura: nomenclatura,
@@ -79,11 +79,11 @@ export default function CriarPortal() {
     };
 
     try {
-      await api.post('/portais', portalData);
+      await api.post('/empresas', empresaData);
       await api.post(`/${nomeBase}/gestores`, gestorData);
       await api.post(`/${nomeBase}/secretarios`, secretarioData);
 
-      alert('Portal criado com sucesso!');
+      alert('Empresa criado com sucesso!');
 
       router.push('/');
     } catch (err) {
@@ -93,10 +93,10 @@ export default function CriarPortal() {
   }
 
   return (
-    <div className={styles.createPortal}>
+    <div className={styles.createEmpresa}>
       <form onSubmit={handleSubmit}>
         <section className={styles.header}>
-          <h2>Criar Portal</h2>
+          <h2>Criar Empresa</h2>
           <div className={styles.buttons}>
             <button type="submit" className={styles.submitButton}>
               Enviar
@@ -114,7 +114,7 @@ export default function CriarPortal() {
           <table>
             <tbody>
               <tr>
-                <td className={styles.destaque}>Nome do Portal</td>
+                <td className={styles.destaque}>Nome do Empresa</td>
                 <td>
                   <input
                     type="text"

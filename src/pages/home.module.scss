@@ -9,7 +9,7 @@
   }
 }
 
-.portais {
+.empresas {
   padding-bottom: 2rem;
 
   table {
@@ -23,7 +23,7 @@
     }
 
     th {
-      color: var(--dark-orange);
+      color: var(--green);
       text-transform: uppercase;
       font: 500 0.75rem Lexend, sans-serif;
       text-align: left;
@@ -58,7 +58,7 @@
     margin-left: auto;
     right: 0;
     bottom: 0;
-    background: var(--light-orange);
+    background: var(--green);
 
     &:hover {
       filter: brightness(0.9);
@@ -81,7 +81,7 @@
     margin-left: auto;
     right: 0;
     bottom: 0;
-    background: var(--dark-orange);
+    background: var(--green);
 
     &:hover {
       filter: brightness(0.9);

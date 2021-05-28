@@ -13,30 +13,30 @@ import {
   mascaraTelefone,
   mascaraData,
 } from '../../../../service/mascaraInput';
-import { PortalContext } from '../../../../context/PortalContext';
+import { EmpresaContext } from '../../../../context/EmpresaContext';
 
-export default function EditarPortal() {
-  const { portal, loading, statusList } = useContext(PortalContext);
+export default function EditarEmpresa() {
+  const { empresa, loading, statusList } = useContext(EmpresaContext);
   const router = useRouter();
 
   if (loading) {
     return <h1>Carregando...</h1>;
   }
 
-  const [nomeBase, setNomeBase] = useState(portal.nomeBase);
-  const [cnpj, setCnpj] = useState(portal.cnpj);
-  const [nomenclatura, setNomenclatura] = useState(portal.nomenclatura);
-  const [vencimento, setVencimento] = useState(portal.vencimento);
-  const [status, setStatus] = useState(portal.status);
-  const [nomeGestor, setNomeGestor] = useState(portal.gestor.nome);
-  const [emailGestor, setEmailGestor] = useState(portal.gestor.email);
-  const [telefoneGestor, setTelefoneGestor] = useState(portal.gestor.telefone);
-  const [nomeSecretario, setNomeSecretario] = useState(portal.secretario.nome);
+  const [nomeBase, setNomeBase] = useState(empresa.nomeBase);
+  const [cnpj, setCnpj] = useState(empresa.cnpj);
+  const [nomenclatura, setNomenclatura] = useState(empresa.nomenclatura);
+  const [vencimento, setVencimento] = useState(empresa.vencimento);
+  const [status, setStatus] = useState(empresa.status);
+  const [nomeGestor, setNomeGestor] = useState(empresa.gestor.nome);
+  const [emailGestor, setEmailGestor] = useState(empresa.gestor.email);
+  const [telefoneGestor, setTelefoneGestor] = useState(empresa.gestor.telefone);
+  const [nomeSecretario, setNomeSecretario] = useState(empresa.secretario.nome);
   const [emailSecretario, setEmailSecretario] = useState(
-    portal.secretario.email
+    empresa.secretario.email
   );
   const [telefoneSecretario, setTelefoneSecretario] = useState(
-    portal.secretario.telefone
+    empresa.secretario.telefone
   );
 
   function handleCnpj(event: React.ChangeEvent<HTMLInputElement>) {
@@ -64,7 +64,7 @@ export default function EditarPortal() {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
-    const portalData = {
+    const empresaData = {
       nomeBase: nomeBase,
       cnpj: cnpj,
       nomenclatura: nomenclatura,
@@ -87,24 +87,24 @@ export default function EditarPortal() {
     };
 
     try {
-      await api.put(`/portais/${nomeBase}`, portalData);
+      await api.put(`/empresas/${nomeBase}`, empresaData);
       await api.put(`/${nomeBase}/gestores`, gestorData);
       await api.put(`/${nomeBase}/secretarios`, secretarioData);
 
-      alert('Portal alterado com sucesso!');
-      router.push(`/portais/${nomeBase}`);
+      alert('Empresa alterado com sucesso!');
+      router.push(`/empresas/${nomeBase}`);
     } catch (err) {
       console.log(err);
       alert(err.response.data.message);
     }
   }
 
-  if (portal) {
+  if (empresa) {
     return (
-      <div className={styles.createPortal}>
+      <div className={styles.createEmpresa}>
         <form onSubmit={handleSubmit}>
           <section className={styles.header}>
-            <h2>Editar Portal</h2>
+            <h2>Editar Empresa</h2>
             <div className={styles.buttons}>
               <button type="submit" className={styles.submitButton}>
                 Enviar
@@ -122,7 +122,7 @@ export default function EditarPortal() {
             <table>
               <tbody>
                 <tr>
-                  <td className={styles.destaque}>Nome do Portal</td>
+                  <td className={styles.destaque}>Nome do Empresa</td>
                   <td>
                     <input
                       type="text"

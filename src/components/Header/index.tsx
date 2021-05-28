@@ -9,9 +9,9 @@ export function Header() {
 
   return (
     <header className={styles.headerContainer}>
-      <img src="/logo.png" alt="SP Consig"></img>
+      <img src="/logo.svg" alt="Tractian"></img>
 
-      <p>São Paulo Consig</p>
+      <p>Escute suas máquinas, elas estão falando!</p>
 
       <span>{currentDate}</span>
     </header>
