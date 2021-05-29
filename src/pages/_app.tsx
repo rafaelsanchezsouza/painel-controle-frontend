@@ -12,13 +12,15 @@ function MyApp({ Component, pageProps }) {
   const [statusList, setStatusList] = useState<string[]>(['0']);
 
   useEffect(() => {
-    const empresa = localStorage.getItem('empresa');
-    const statusList = localStorage.getItem('statusList');
-    if (empresa) {
-      setEmpresa(JSON.parse(empresa));
-    }
-    if (statusList) {
-      setStatusList(JSON.parse(statusList));
+    if (typeof window !== 'undefined') {
+      const empresa = localStorage.getItem('empresa');
+      const statusList = localStorage.getItem('statusList');
+      if (empresa) {
+        setEmpresa(JSON.parse(empresa));
+      }
+      if (statusList) {
+        setStatusList(JSON.parse(statusList));
+      }
     }
     setLoading(false);
   }, []);
