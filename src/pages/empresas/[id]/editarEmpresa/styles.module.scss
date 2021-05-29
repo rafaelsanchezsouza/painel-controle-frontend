@@ -9,7 +9,7 @@
   }
 
   h3 {
-    color: var(--green);
+    color: var(--black);
     text-transform: uppercase;
     margin-top: 0.5rem;
     margin-bottom: 1.5rem;
@@ -71,7 +71,7 @@
   }
 
   .destaque {
-    color: var(--green);
+    color: var(--black);
     font-family: Lexend, sans-serif;
     font-weight: 600;
     text-decoration: none;
@@ -80,46 +80,51 @@
   }
 }
 
-.infoGeral {
-  padding-bottom: 2rem;
+.dadosGerais {
+  background-color: var(--light-gray);
+  border-radius: 1rem;
+  padding: 2rem;
+  .infoGeral {
+    padding-bottom: 2rem;
 
-  table {
-    width: 100%;
+    table {
+      width: 100%;
 
-    th,
-    td {
-      height: 2rem;
+      th,
+      td {
+        height: 2rem;
+        padding: 0.5rem 1rem;
+        color: var(--dark-blue);
+      }
+
+      th {
+        color: var(--green);
+        text-transform: uppercase;
+        font: 500 1rem Lexend, sans-serif;
+        text-align: left;
+        height: 2rem;
+      }
+
+      td {
+        font-size: 1.15rem;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--light-blue);
+      }
+    }
+    .destaque {
+      table-layout: fixed;
+      width: 400px;
       padding: 0.5rem 1rem;
-      color: var(--dark-blue);
-    }
-
-    th {
-      color: var(--green);
-      text-transform: uppercase;
-      font: 500 1rem Lexend, sans-serif;
-      text-align: left;
-      height: 2rem;
-    }
-
-    td {
-      font-size: 1.15rem;
-    }
-
-    a {
+      color: var(--black);
+      font-family: Lexend, sans-serif;
+      font-weight: 600;
       text-decoration: none;
-      color: var(--light-blue);
+      line-height: 1.4rem;
+      font-size: 1.2rem;
     }
-  }
-  .destaque {
-    table-layout: fixed;
-    width: 400px;
-    padding: 0.5rem 1rem;
-    color: var(--green);
-    font-family: Lexend, sans-serif;
-    font-weight: 600;
-    text-decoration: none;
-    line-height: 1.4rem;
-    font-size: 1.2rem;
   }
 }
 

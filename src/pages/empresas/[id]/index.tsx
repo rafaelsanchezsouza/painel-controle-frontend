@@ -69,40 +69,9 @@ export default function Empresas() {
               </table>
             </section>
 
-            <section className={styles.infoDepartamento}>
-              <h3>Unidades</h3>
-              <table cellSpacing={0}>
-                <thead>
-                  <tr>
-                    <th>id</th>
-                    <th>Nome</th>
-                    <th>Endereço</th>
-                    <th>Ativos</th>
-                    <th>Status Ativos</th>
-                    <th>Atualizado em</th>
-                  </tr>
-                </thead>
-
-                <tbody>{mapUnidades(empresa.unidades)}</tbody>
-              </table>
-
-              <h3>Usuários</h3>
-              <table cellSpacing={0}>
-                <thead>
-                  <tr>
-                    <th>id</th>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>Telefone</th>
-                    <th>Departamento</th>
-                    <th>Ativos</th>
-                    <th>Status Ativos</th>
-                    <th>Atualizado em</th>
-                  </tr>
-                </thead>
-
-                <tbody>{mapUsuarios(empresa.usuarios)}</tbody>
-              </table>
+            <section className={styles.detalhamento}>
+              {renderizaUnidades(empresa.unidades)}
+              {renderizaUsuarios(empresa.usuarios)}
             </section>
           </div>
         </div>
@@ -114,39 +83,85 @@ export default function Empresas() {
   } else return <h1>Carregando...</h1>;
 }
 
-function mapUnidades(unidades: Unidade[]) {
-  return unidades.map((unidade: Unidade) => {
+function renderizaUnidades(unidades: Unidade[]) {
+  if (unidades.length > 0) {
     return (
-      <tr key={unidade.id}>
-        <td>{unidade.id}</td>
-        <td>
-          <a href={`/unidades/${unidade.id}`}>{unidade.nome}</a>
-        </td>
-        <td>{unidade.endereco}</td>
-        <td>{unidade.ativos.length}</td>
-        <td>{calculaAtivos(unidade.ativos)}</td>
-        <td>{formatDate(unidade.updated_at)}</td>
-      </tr>
+      <>
+        <h3>Unidades</h3>
+        <table cellSpacing={0}>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>Nome</th>
+              <th>Endereço</th>
+              <th>Ativos</th>
+              <th>Status Ativos</th>
+              <th>Atualizado em</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {unidades.map((unidade: Unidade) => {
+              return (
+                <tr key={unidade.id}>
+                  <td>{unidade.id}</td>
+                  <td>
+                    <a href={`/unidades/${unidade.id}`}>{unidade.nome}</a>
+                  </td>
+                  <td>{unidade.endereco}</td>
+                  <td>{unidade.ativos.length}</td>
+                  <td>{calculaAtivos(unidade.ativos)}</td>
+                  <td>{formatDate(unidade.updated_at)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </>
     );
-  });
+  } else return <h3>Sem Unidades Cadastradas</h3>;
 }
-function mapUsuarios(usuarios: Usuario[]) {
-  return usuarios.map((usuario: Usuario) => {
+function renderizaUsuarios(usuarios: Usuario[]) {
+  if (usuarios.length > 0) {
     return (
-      <tr key={usuario.id}>
-        <td>{usuario.id}</td>
-        <td>
-          <a href={`/usuarios/${usuario.id}`}>{usuario.nome}</a>
-        </td>
-        <td>{usuario.email}</td>
-        <td>{usuario.telefone}</td>
-        <td>{usuario.departamento}</td>
-        <td>{usuario.ativos.length}</td>
-        <td>{calculaAtivos(usuario.ativos)}</td>
-        <td>{formatDate(usuario.updated_at)}</td>
-      </tr>
+      <>
+        <h3>Usuários</h3>
+        <table cellSpacing={0}>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Telefone</th>
+              <th>Departamento</th>
+              <th>Ativos</th>
+              <th>Status Ativos</th>
+              <th>Atualizado em</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {usuarios.map((usuario: Usuario) => {
+              return (
+                <tr key={usuario.id}>
+                  <td>{usuario.id}</td>
+                  <td>
+                    <a href={`/usuarios/${usuario.id}`}>{usuario.nome}</a>
+                  </td>
+                  <td>{usuario.email}</td>
+                  <td>{usuario.telefone}</td>
+                  <td>{usuario.departamento}</td>
+                  <td>{usuario.ativos.length}</td>
+                  <td>{calculaAtivos(usuario.ativos)}</td>
+                  <td>{formatDate(usuario.updated_at)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </>
     );
-  });
+  } else return <h3>Sem Usuários Cadastrados</h3>;
 }
 function calculaAtivos(ativos: Ativo[]) {
   const emParada = ativos.filter((ativo) => ativo.status === 'Em Parada')

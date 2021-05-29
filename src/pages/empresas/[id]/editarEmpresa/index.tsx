@@ -25,40 +25,13 @@ export default function EditarEmpresa() {
 
   const [id, setId] = useState(empresa.id);
   const [cnpj, setCnpj] = useState(empresa.cnpj);
-  const [nomenclatura, setNomenclatura] = useState(empresa.nomenclatura);
-  const [vencimento, setVencimento] = useState(empresa.vencimento);
-  const [status, setStatus] = useState(empresa.status);
-  const [nomeGestor, setNomeGestor] = useState(empresa.gestor.nome);
-  const [emailGestor, setEmailGestor] = useState(empresa.gestor.email);
-  const [telefoneGestor, setTelefoneGestor] = useState(empresa.gestor.telefone);
-  const [nomeSecretario, setNomeSecretario] = useState(empresa.secretario.nome);
-  const [emailSecretario, setEmailSecretario] = useState(
-    empresa.secretario.email
-  );
-  const [telefoneSecretario, setTelefoneSecretario] = useState(
-    empresa.secretario.telefone
-  );
+  const [nome, setNomenclatura] = useState(empresa.nome);
+  // const [vencimento, setVencimento] = useState(empresa.vencimento);
+  // const [status, setStatus] = useState(empresa.status);
 
   function handleCnpj(event: React.ChangeEvent<HTMLInputElement>) {
     const cnpjFormatado = mascaraCnpj(event.target.value);
     setCnpj(cnpjFormatado);
-  }
-
-  function handleTelefoneGestor(event: React.ChangeEvent<HTMLInputElement>) {
-    const telefoneFormatado = mascaraTelefone(event.target.value);
-    setTelefoneGestor(telefoneFormatado);
-  }
-
-  function handleTelefoneSecretario(
-    event: React.ChangeEvent<HTMLInputElement>
-  ) {
-    const telefoneFormatado = mascaraTelefone(event.target.value);
-    setTelefoneSecretario(telefoneFormatado);
-  }
-
-  function handleData(event: React.ChangeEvent<HTMLInputElement>) {
-    const vencimentoFormatado = mascaraData(event.target.value);
-    setVencimento(vencimentoFormatado);
   }
 
   async function handleSubmit(event: FormEvent) {
@@ -67,31 +40,13 @@ export default function EditarEmpresa() {
     const empresaData = {
       id: id,
       cnpj: cnpj,
-      nomenclatura: nomenclatura,
-      vencimento: vencimento,
-      status: status,
-    };
-
-    const gestorData = {
-      id: id,
-      nome: nomeGestor,
-      email: emailGestor,
-      telefone: telefoneGestor,
-    };
-
-    const secretarioData = {
-      id: id,
-      nome: nomeSecretario,
-      email: emailSecretario,
-      telefone: telefoneSecretario,
+      nome: nome,
     };
 
     try {
       await api.put(`/empresas/${id}`, empresaData);
-      await api.put(`/${id}/gestores`, gestorData);
-      await api.put(`/${id}/secretarios`, secretarioData);
 
-      alert('Empresa alterado com sucesso!');
+      alert('Empresa alterada com sucesso!');
       router.push(`/empresas/${id}`);
     } catch (err) {
       console.log(err);
@@ -117,140 +72,51 @@ export default function EditarEmpresa() {
             </div>
           </section>
 
-          <h3>Dados Gerais</h3>
-          <section className={styles.infoGeral}>
-            <table>
-              <tbody>
-                <tr>
-                  <td className={styles.destaque}>Nome do Empresa</td>
-                  <td>
-                    <input
-                      type="text"
-                      value={nomenclatura}
-                      onChange={(event) => setNomenclatura(event.target.value)}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className={styles.destaque}>Nome Base</td>
-                  <td>{id}</td>
-                </tr>
-                <tr>
-                  <td className={styles.destaque}>CNPJ</td>
-                  <td>
-                    <input
-                      type="text"
-                      value={cnpj}
-                      onChange={handleCnpj}
-                      maxLength={18}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className={styles.destaque}>Vencimento do Comodato</td>
-                  <td>
-                    <input
-                      type="text"
-                      value={vencimento}
-                      onChange={handleData}
-                      maxLength={14}
-                    />
-                  </td>
-                </tr>
+          <div className={styles.dadosGerais}>
+            <h3>Dados Gerais</h3>
+            <section className={styles.infoGeral}>
+              <table>
+                <tbody>
+                  <tr>
+                    <td className={styles.destaque}>Nome do Empresa</td>
+                    <td>
+                      <input
+                        type="text"
+                        value={nome}
+                        onChange={(event) =>
+                          setNomenclatura(event.target.value)
+                        }
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className={styles.destaque}>ID</td>
+                    <td>{id}</td>
+                  </tr>
+                  <tr>
+                    <td className={styles.destaque}>CNPJ</td>
+                    <td>
+                      <input
+                        type="text"
+                        value={cnpj}
+                        onChange={handleCnpj}
+                        maxLength={18}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className={styles.destaque}>Vencimento do Comodato</td>
+                    <td>Sem implementação</td>
+                  </tr>
 
-                <tr>
-                  <td className={styles.destaque}>Status</td>
-                  <td>
-                    <select
-                      key={status}
-                      value={status}
-                      onChange={(event) => setStatus(event.target.value)}
-                    >
-                      {statusList.map((option: any) => {
-                        return (
-                          <option key={option.label} value={option.value}>
-                            {option.label}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-
-          <h3>Comercial</h3>
-          <section className={styles.infoDepartamento}>
-            <table cellSpacing={0}>
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Nome</th>
-                  <th>Telefone</th>
-                  <th>E-mail</th>
-                  <th></th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td className={styles.destaque}>Gestor da Folha</td>
-                  <td>
-                    <input
-                      type="text"
-                      value={nomeGestor}
-                      onChange={(event) => setNomeGestor(event.target.value)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      value={telefoneGestor}
-                      onChange={handleTelefoneGestor}
-                      maxLength={15}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      value={emailGestor}
-                      onChange={(event) => setEmailGestor(event.target.value)}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className={styles.destaque}>Secretário da Pasta</td>
-                  <td>
-                    <input
-                      type="text"
-                      value={nomeSecretario}
-                      onChange={(event) =>
-                        setNomeSecretario(event.target.value)
-                      }
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      value={telefoneSecretario}
-                      onChange={handleTelefoneSecretario}
-                      maxLength={15}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      value={emailSecretario}
-                      onChange={(event) =>
-                        setEmailSecretario(event.target.value)
-                      }
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
+                  <tr>
+                    <td className={styles.destaque}>Status</td>
+                    <td>Sem implementação</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
         </form>
       </div>
     );
