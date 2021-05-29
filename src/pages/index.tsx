@@ -66,12 +66,15 @@ export default function Home({ empresas }: HomeProps) {
                         event.preventDefault();
                         try {
                           await api.delete(`/empresas/${empresa.id}`);
-
-                          alert('Empresa excluido com sucesso!');
+                          if (typeof window !== 'undefined') {
+                            alert('Empresa excluido com sucesso!');
+                          }
                           router.reload();
                         } catch (err) {
                           console.log(err);
-                          alert(err.response.data.message);
+                          if (typeof window !== 'undefined') {
+                            alert(err.response.data.message);
+                          }
                         }
                       }}
                     >

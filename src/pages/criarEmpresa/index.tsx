@@ -39,12 +39,14 @@ export default function CriarEmpresa() {
 
     try {
       await api.post('/empresas', empresaData);
-
-      alert('Empresa criado com sucesso!');
-
+      if (typeof window !== 'undefined') {
+        alert('Empresa criado com sucesso!');
+      }
       router.push('/');
     } catch (err) {
-      alert(err.response.data.message);
+      if (typeof window !== 'undefined') {
+        alert(err.response.data.message);
+      }
     }
   }
 

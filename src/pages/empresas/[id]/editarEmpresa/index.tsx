@@ -45,12 +45,15 @@ export default function EditarEmpresa() {
 
     try {
       await api.put(`/empresas/${id}`, empresaData);
-
-      alert('Empresa alterada com sucesso!');
+      if (typeof window !== 'undefined') {
+        alert('Empresa alterada com sucesso!');
+      }
       router.push(`/empresas/${id}`);
     } catch (err) {
       console.log(err);
-      alert(err.response.data.message);
+      if (typeof window !== 'undefined') {
+        alert(err.response.data.message);
+      }
     }
   }
 
