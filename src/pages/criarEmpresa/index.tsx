@@ -17,7 +17,7 @@ import {
 export default function CriarEmpresa() {
   const { statusList } = useContext(EmpresaContext);
 
-  const [nomeBase, setNomeBase] = useState('');
+  const [id, setId] = useState('');
   const [cnpj, setCnpj] = useState('');
   const [nomenclatura, setNomenclatura] = useState('');
   const [vencimento, setVencimento] = useState('');
@@ -57,7 +57,7 @@ export default function CriarEmpresa() {
     event.preventDefault();
 
     const empresaData = {
-      nomeBase: nomeBase,
+      id: id,
       cnpj: cnpj,
       nomenclatura: nomenclatura,
       vencimento: vencimento,
@@ -65,14 +65,14 @@ export default function CriarEmpresa() {
     };
 
     const gestorData = {
-      nomeBase: nomeBase,
+      id: id,
       nome: nomeGestor,
       email: emailGestor,
       telefone: telefoneGestor,
     };
 
     const secretarioData = {
-      nomeBase: nomeBase,
+      id: id,
       nome: nomeSecretario,
       email: emailSecretario,
       telefone: telefoneSecretario,
@@ -80,8 +80,8 @@ export default function CriarEmpresa() {
 
     try {
       await api.post('/empresas', empresaData);
-      await api.post(`/${nomeBase}/gestores`, gestorData);
-      await api.post(`/${nomeBase}/secretarios`, secretarioData);
+      await api.post(`/${id}/gestores`, gestorData);
+      await api.post(`/${id}/secretarios`, secretarioData);
 
       alert('Empresa criado com sucesso!');
 
@@ -128,8 +128,8 @@ export default function CriarEmpresa() {
                 <td>
                   <input
                     type="text"
-                    value={nomeBase}
-                    onChange={(event) => setNomeBase(event.target.value)}
+                    value={id}
+                    onChange={(event) => setId(event.target.value)}
                   />
                 </td>
               </tr>

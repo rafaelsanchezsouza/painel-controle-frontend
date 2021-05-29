@@ -22,6 +22,9 @@ export default function Home({ empresas }: HomeProps) {
   escolheEmpresa(empresas[0]);
   defineStatus(statusList);
 
+  console.log('data');
+  console.log(empresas);
+
   return (
     <div className={styles.homepage}>
       <section className={styles.header}>
@@ -90,7 +93,6 @@ export default function Home({ empresas }: HomeProps) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data } = await api.get('/empresas');
-
   return {
     props: {
       empresas: data,

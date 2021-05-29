@@ -7,15 +7,24 @@ type Empresa = {
   cnpj: string;
   created_at: Date;
   updated_at: Date;
-  unidade: {
+  unidades: [{
     id: number;
     nome: string;
     endereco: string;
     created_at: Date;
     updated_at: Date;
-    ativos: Ativo[];
-  };
-  usuario: {
+    ativos: [{
+      id: number;
+      nome: string;
+      descricao: string;
+      status: string;
+      saude: string;
+      created_at: Date;
+      uptated_at: Date;
+      imagemAtivo: { path: string };
+    }];
+  }];
+  usuarios: [{
     id: number;
     nome: string;
     email: string;
@@ -23,8 +32,17 @@ type Empresa = {
     departamento: string;
     created_at: Date;
     updated_at: Date;
-    ativos: Ativo[];
-  };
+    ativos: [{
+      id: number;
+      nome: string;
+      descricao: string;
+      status: string;
+      saude: string;
+      created_at: Date;
+      uptated_at: Date;
+      imagemAtivo: { path: string };
+    }];
+  }];
 };
 
 type Unidade = {
@@ -33,7 +51,7 @@ type Unidade = {
   endereco: string;
   created_at: Date;
   updated_at: Date;
-  ativo: Ativo[];
+  ativos: Ativo[];
 };
 
 type Usuario = {
@@ -44,7 +62,7 @@ type Usuario = {
   departamento: string;
   created_at: Date;
   updated_at: Date;
-  ativo: Ativo[];
+  ativos: Ativo[];
 };
 
 type Ativo = {

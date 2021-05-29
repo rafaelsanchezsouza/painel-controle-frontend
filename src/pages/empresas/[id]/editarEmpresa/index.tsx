@@ -23,7 +23,7 @@ export default function EditarEmpresa() {
     return <h1>Carregando...</h1>;
   }
 
-  const [nomeBase, setNomeBase] = useState(empresa.nomeBase);
+  const [id, setId] = useState(empresa.id);
   const [cnpj, setCnpj] = useState(empresa.cnpj);
   const [nomenclatura, setNomenclatura] = useState(empresa.nomenclatura);
   const [vencimento, setVencimento] = useState(empresa.vencimento);
@@ -65,7 +65,7 @@ export default function EditarEmpresa() {
     event.preventDefault();
 
     const empresaData = {
-      nomeBase: nomeBase,
+      id: id,
       cnpj: cnpj,
       nomenclatura: nomenclatura,
       vencimento: vencimento,
@@ -73,26 +73,26 @@ export default function EditarEmpresa() {
     };
 
     const gestorData = {
-      nomeBase: nomeBase,
+      id: id,
       nome: nomeGestor,
       email: emailGestor,
       telefone: telefoneGestor,
     };
 
     const secretarioData = {
-      nomeBase: nomeBase,
+      id: id,
       nome: nomeSecretario,
       email: emailSecretario,
       telefone: telefoneSecretario,
     };
 
     try {
-      await api.put(`/empresas/${nomeBase}`, empresaData);
-      await api.put(`/${nomeBase}/gestores`, gestorData);
-      await api.put(`/${nomeBase}/secretarios`, secretarioData);
+      await api.put(`/empresas/${id}`, empresaData);
+      await api.put(`/${id}/gestores`, gestorData);
+      await api.put(`/${id}/secretarios`, secretarioData);
 
       alert('Empresa alterado com sucesso!');
-      router.push(`/empresas/${nomeBase}`);
+      router.push(`/empresas/${id}`);
     } catch (err) {
       console.log(err);
       alert(err.response.data.message);
@@ -133,7 +133,7 @@ export default function EditarEmpresa() {
                 </tr>
                 <tr>
                   <td className={styles.destaque}>Nome Base</td>
-                  <td>{nomeBase}</td>
+                  <td>{id}</td>
                 </tr>
                 <tr>
                   <td className={styles.destaque}>CNPJ</td>
