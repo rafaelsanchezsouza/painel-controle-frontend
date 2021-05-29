@@ -22,9 +22,6 @@ export default function Home({ empresas }: HomeProps) {
   escolheEmpresa(empresas[0]);
   defineStatus(statusList);
 
-  console.log('data');
-  console.log(empresas);
-
   return (
     <div className={styles.homepage}>
       <section className={styles.header}>
