@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "server": "json-server portais.json -W -d 750 -p 3333"
+    "server": "json-server portais.json -W -d 750 -p 3333",
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "axios": "^0.21.1",
