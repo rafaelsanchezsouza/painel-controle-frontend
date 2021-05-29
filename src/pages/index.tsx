@@ -68,8 +68,8 @@ export default function Home({ empresas }: HomeProps) {
                           await api.delete(`/empresas/${empresa.id}`);
                           if (typeof window !== 'undefined') {
                             alert('Empresa excluido com sucesso!');
+                            router.reload();
                           }
-                          router.reload();
                         } catch (err) {
                           console.log(err);
                           if (typeof window !== 'undefined') {

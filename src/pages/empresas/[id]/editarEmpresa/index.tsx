@@ -47,8 +47,8 @@ export default function EditarEmpresa() {
       await api.put(`/empresas/${id}`, empresaData);
       if (typeof window !== 'undefined') {
         alert('Empresa alterada com sucesso!');
+        router.push(`/empresas/${id}`);
       }
-      router.push(`/empresas/${id}`);
     } catch (err) {
       console.log(err);
       if (typeof window !== 'undefined') {
